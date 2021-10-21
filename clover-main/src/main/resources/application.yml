@@ -1,0 +1,16 @@
+server:
+  servlet:
+    context-path: /clover
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    hikari:
+      maximum-pool-size: 20  # 最大连接数
+      minimum-idle: 5  # 最小空闲连接数
+      pool-name: HikariCP
+      auto-commit: true
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
