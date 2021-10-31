@@ -5,29 +5,27 @@
  */
 package com.liuballoon.common.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 自定义响应对象
+ */
+@AllArgsConstructor
 @Getter
 @Setter
-public class Result<T> {
+public class Result {
     private int code;
     private String message;
     private Boolean success;
-    private T data;
+    private Object data;
 
-    public void success(T data) {
-        this.code = 200;
-        this.message = message;
-        this.success = true;
-        this.data = data;
+    public static Result success(Object data) {
+        return null;
     }
 
-    public Result<T> failure(int code, String message) {
-        this.code = code;
-        this.message = message;
-        this.success = false;
-        this.data = null;
-        return null;
+    public static Result failure(int code, String message) {
+        return new Result(code, message, false, null);
     }
 }
