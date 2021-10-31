@@ -32,16 +32,16 @@ public class GlobalExceptionHandler {
         int code = 9999;
         String message = this.messageCodesReader.read(code);
         System.out.println(e);
-        return new Result().failure(code, message);
+        return Result.failure(code, message);
     }
 
     @ExceptionHandler(HttpException.class)
-    public ResponseEntity handleHttpException(HttpException e) {
+    public ResponseEntity<Result> handleHttpException(HttpException e) {
         String message = this.messageCodesReader.read(e.getMessageCode());
         HttpStatus httpStatus = HttpStatus.resolve(e.getStatusCode());
         assert httpStatus != null;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return new ResponseEntity<>(new Result(), headers, httpStatus);
+        return new ResponseEntity<>(Result.failure(e.getMessageCode(), message), headers, httpStatus);
     }
 }
