@@ -5,17 +5,22 @@
  */
 package com.liuballoon.api.v1;
 
+import com.liuballoon.common.response.Result;
 import com.liuballoon.pojo.model.ThemeDO;
 import com.liuballoon.service.ThemeService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
+@Api(tags = "专题")
 @RestController
 @RequestMapping("/theme")
 public class ThemeController {
@@ -23,9 +28,11 @@ public class ThemeController {
     @Autowired
     private ThemeService themeService;
 
+    @ApiOperation(value = "获取专题", notes = "根据一组名称获取对应的所有专题")
     @GetMapping("/names")
-    public List<ThemeDO> getThemes(@RequestParam String names) {
+    public Result getThemes(@RequestParam @NotNull String names) {
         List<String> nameList = Arrays.asList(names.split(","));
-        return this.themeService.getThemesByNames(nameList);
+        List<ThemeDO> themes = this.themeService.getThemesByNames(nameList);
+        return Result.success(themes);
     }
 }

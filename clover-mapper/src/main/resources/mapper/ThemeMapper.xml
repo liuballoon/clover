@@ -4,6 +4,7 @@
     <select id="selectThemesByNames" resultType="com.liuballoon.pojo.model.ThemeDO">
         SELECT *
         FROM theme
-        WHERE name in #{names}
+        WHERE name IN (#{names})
+          AND delete_time IS NULL
     </select>
 </mapper>

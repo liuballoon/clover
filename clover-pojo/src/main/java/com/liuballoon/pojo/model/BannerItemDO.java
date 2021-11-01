@@ -5,11 +5,13 @@
  */
 package com.liuballoon.pojo.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@TableName("banner_item")
 public class BannerItemDO extends BaseDO {
     private String id;
     private String bannerId;

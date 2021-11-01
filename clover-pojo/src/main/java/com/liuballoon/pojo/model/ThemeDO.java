@@ -5,11 +5,13 @@
  */
 package com.liuballoon.pojo.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@TableName("theme")
 public class ThemeDO extends BaseDO {
     private String name;
     private String templateName;
