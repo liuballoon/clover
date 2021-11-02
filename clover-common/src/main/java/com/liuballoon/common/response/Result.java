@@ -22,7 +22,7 @@ public class Result {
     private Object data;
 
     public static Result success(Object data) {
-        return null;
+        return new Result(200, "请求成功", true, data);
     }
 
     public static Result failure(int code, String message) {
