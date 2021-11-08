@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface ThemeMapper extends BaseMapper<ThemeDO> {
     /**
-     * 根据一组名称获取对应的所有专题
+     * 根据一组名称获取所有专题
      *
      * @param names 一组名称
      * @return

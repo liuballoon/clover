@@ -19,5 +19,5 @@ public interface BannerMapper extends BaseMapper<BannerDO> {
      * @param name 名称
      * @return
      */
-    Optional<BannerDO> selectByName(String name);
+    Optional<BannerDO> selectBannerByName(String name);
 }

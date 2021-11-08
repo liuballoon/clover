@@ -28,9 +28,9 @@ public class ThemeController {
     @Autowired
     private ThemeService themeService;
 
-    @ApiOperation(value = "获取专题", notes = "根据一组名称获取对应的所有专题")
+    @ApiOperation(value = "根据一组名称获取所有专题")
     @GetMapping("/names")
-    public Result getThemes(@RequestParam @NotNull String names) {
+    public Result getThemesByNames(@RequestParam @NotNull String names) {
         List<String> nameList = Arrays.asList(names.split(","));
         List<ThemeDO> themes = this.themeService.getThemesByNames(nameList);
         return Result.success(themes);

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface ThemeService {
     /**
-     * 根据一组名称获取对应的所有专题
+     * 根据一组名称获取所有专题
      *
      * @param names 一组名称
      * @return

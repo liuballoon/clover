@@ -29,8 +29,8 @@ public class BannerServiceImpl implements BannerService {
 
     @Override
     public BannerVO getBannerByName(String name) {
-        BannerDO bannerDO = this.bannerMapper.selectByName(name).orElseThrow(() -> new NotFoundException(10005));  // 判断轮播图是否存在
-        List<BannerItemVO> items = this.bannerItemMapper.selectListByBannerId(bannerDO.getId())
+        BannerDO bannerDO = this.bannerMapper.selectBannerByName(name).orElseThrow(() -> new NotFoundException(10005));  // 判断轮播图是否存在
+        List<BannerItemVO> items = this.bannerItemMapper.selectItemsByBannerId(bannerDO.getId())
                 .stream()
                 .map(BannerItemVO::new)
                 .collect(Collectors.toList());

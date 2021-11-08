@@ -19,5 +19,5 @@ public interface BannerItemMapper extends BaseMapper<BannerItemDO> {
      * @param bannerId 轮播图id
      * @return
      */
-    List<BannerItemDO> selectListByBannerId(String bannerId);
+    List<BannerItemDO> selectItemsByBannerId(String bannerId);
 }
