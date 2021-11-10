@@ -15,6 +15,7 @@ import lombok.Setter;
 public class BannerItemDO extends BaseDO {
     private String id;
     private String bannerId;
+    private String name;
     private String coverImg;
     private Integer type;
     private String keyword;

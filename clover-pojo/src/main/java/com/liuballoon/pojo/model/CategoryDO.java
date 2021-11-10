@@ -16,6 +16,5 @@ public class CategoryDO extends BaseDO {
     private String pid;
     private String name;
     private String coverImg;
-    private Boolean grid;
     private Boolean online;
 }
