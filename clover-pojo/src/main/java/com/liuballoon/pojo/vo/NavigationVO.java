@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GridCategoryVO {
+public class NavigationVO {
     private String id;
     private String name;
     private String coverImg;

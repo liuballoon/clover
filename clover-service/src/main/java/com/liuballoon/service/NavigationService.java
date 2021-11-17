@@ -15,5 +15,5 @@ public interface NavigationService {
      *
      * @return
      */
-    List<NavigationVO> getAllNavigation();
+    List<NavigationVO> getAllNavigations();
 }

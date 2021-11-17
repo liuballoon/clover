@@ -5,8 +5,11 @@
  */
 package com.liuballoon.service.impl;
 
+import com.liuballoon.common.exception.http.NotFoundException;
+import com.liuballoon.mapper.NavigationMapper;
 import com.liuballoon.pojo.vo.NavigationVO;
 import com.liuballoon.service.NavigationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +17,15 @@ import java.util.List;
 @Service
 public class NavigationServiceImpl implements NavigationService {
 
+    @Autowired
+    private NavigationMapper navigationMapper;
+
     @Override
-    public List<NavigationVO> getAllNavigation() {
-        return null;
+    public List<NavigationVO> getAllNavigations() {
+        List<NavigationVO> navigations = this.navigationMapper.selectAllNavigations();
+        if (navigations.isEmpty()) {
+            throw new NotFoundException(40005);
+        }
+        return navigations;
     }
 }

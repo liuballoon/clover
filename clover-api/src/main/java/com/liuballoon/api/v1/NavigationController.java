@@ -25,10 +25,10 @@ public class NavigationController {
     @Autowired
     private NavigationService navigationService;
 
-    @ApiOperation(value = "获取导航", notes = "获取所有导航")
+    @ApiOperation(value = "获取所有导航")
     @GetMapping("/all")
-    public Result getNavigation() {
-        List<NavigationVO> navigations = this.navigationService.getAllNavigation();
+    public Result getAllNavigations() {
+        List<NavigationVO> navigations = this.navigationService.getAllNavigations();
         return Result.success(navigations);
     }
 }
