@@ -7,7 +7,7 @@ package com.liuballoon.service.impl;
 
 import com.liuballoon.common.exception.http.NotFoundException;
 import com.liuballoon.mapper.ThemeMapper;
-import com.liuballoon.pojo.model.ThemeDO;
+import com.liuballoon.pojo.vo.ThemeVO;
 import com.liuballoon.service.ThemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,8 @@ public class ThemeServiceImpl implements ThemeService {
     private ThemeMapper themeMapper;
 
     @Override
-    public List<ThemeDO> getThemesByNames(List<String> names) {
-        List<ThemeDO> themes = this.themeMapper.selectThemesByNames(names);
+    public List<ThemeVO> getThemesByNames(List<String> names) {
+        List<ThemeVO> themes = this.themeMapper.selectThemesByNames(names);
         if (themes.isEmpty()) {
             throw new NotFoundException(20005);
         }

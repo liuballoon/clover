@@ -5,16 +5,16 @@
  */
 package com.liuballoon.service;
 
-import com.liuballoon.pojo.model.ThemeDO;
+import com.liuballoon.pojo.vo.ThemeVO;
 
 import java.util.List;
 
 public interface ThemeService {
     /**
-     * 根据一组名称获取所有专题
+     * 根据一组名称获取一组专题
      *
      * @param names 一组名称
      * @return
      */
-    List<ThemeDO> getThemesByNames(List<String> names);
+    List<ThemeVO> getThemesByNames(List<String> names);
 }

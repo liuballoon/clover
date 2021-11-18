@@ -6,7 +6,7 @@
 package com.liuballoon.api.v1;
 
 import com.liuballoon.common.response.Result;
-import com.liuballoon.pojo.model.ThemeDO;
+import com.liuballoon.pojo.vo.ThemeVO;
 import com.liuballoon.service.ThemeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,11 +28,11 @@ public class ThemeController {
     @Autowired
     private ThemeService themeService;
 
-    @ApiOperation(value = "根据一组名称获取所有专题")
+    @ApiOperation(value = "根据一组名称获取一组专题")
     @GetMapping("/names")
     public Result getThemesByNames(@RequestParam @NotNull String names) {
         List<String> nameList = Arrays.asList(names.split(","));
-        List<ThemeDO> themes = this.themeService.getThemesByNames(nameList);
+        List<ThemeVO> themes = this.themeService.getThemesByNames(nameList);
         return Result.success(themes);
     }
 }
