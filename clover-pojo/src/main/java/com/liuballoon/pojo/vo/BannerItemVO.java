@@ -5,10 +5,8 @@
  */
 package com.liuballoon.pojo.vo;
 
-import com.liuballoon.pojo.model.BannerItemDO;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 
 @Getter
 @Setter
@@ -18,9 +16,4 @@ public class BannerItemVO {
     private String coverImg;
     private Integer type;
     private String keyword;
-    private Integer sort;
-
-    public BannerItemVO(BannerItemDO bannerItemDO) {
-        BeanUtils.copyProperties(bannerItemDO, this);
-    }
 }

@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BannerServiceImpl implements BannerService {
@@ -29,11 +28,8 @@ public class BannerServiceImpl implements BannerService {
 
     @Override
     public BannerVO getBannerByName(String name) {
-        BannerDO bannerDO = this.bannerMapper.selectBannerByName(name).orElseThrow(() -> new NotFoundException(10005));  // 判断轮播图是否存在
-        List<BannerItemVO> items = this.bannerItemMapper.selectItemsByBannerId(bannerDO.getId())
-                .stream()
-                .map(BannerItemVO::new)
-                .collect(Collectors.toList());
+        BannerDO bannerDO = this.bannerMapper.selectBannerByName(name).orElseThrow(() -> new NotFoundException(10005));
+        List<BannerItemVO> items = this.bannerItemMapper.selectItemsByBannerId(bannerDO.getId());
         return new BannerVO(bannerDO, items);
     }
 }
