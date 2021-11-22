@@ -21,8 +21,8 @@ public class ThemeServiceImpl implements ThemeService {
     private ThemeMapper themeMapper;
 
     @Override
-    public List<ThemeVO> getThemesByNames(List<String> names) {
-        List<ThemeVO> themes = this.themeMapper.selectThemesByNames(names);
+    public List<ThemeVO> getAllThemes() {
+        List<ThemeVO> themes = this.themeMapper.selectAllThemes();
         if (themes.isEmpty()) {
             throw new NotFoundException(20005);
         }

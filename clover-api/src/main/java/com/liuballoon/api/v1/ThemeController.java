@@ -13,11 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.List;
 
 @Api(tags = "专题")
@@ -28,11 +25,10 @@ public class ThemeController {
     @Autowired
     private ThemeService themeService;
 
-    @ApiOperation(value = "根据一组名称获取一组专题")
-    @GetMapping("/names")
-    public Result getThemesByNames(@RequestParam @NotNull String names) {
-        List<String> nameList = Arrays.asList(names.split(","));
-        List<ThemeVO> themes = this.themeService.getThemesByNames(nameList);
+    @ApiOperation(value = "获取所有专题")
+    @GetMapping("/all")
+    public Result getAllThemes() {
+        List<ThemeVO> themes = this.themeService.getAllThemes();
         return Result.success(themes);
     }
 }
