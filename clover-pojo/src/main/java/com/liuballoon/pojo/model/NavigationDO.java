@@ -14,5 +14,8 @@ import lombok.Setter;
 @TableName("navigation")
 public class NavigationDO extends BaseDO {
     private String name;
+    private String coverImg;
+    private Integer type;
+    private String keyword;
     private Boolean online;
 }
