@@ -14,4 +14,6 @@ public class NavigationVO {
     private String id;
     private String name;
     private String coverImg;
+    private Integer type;
+    private String keyword;
 }
