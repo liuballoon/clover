@@ -7,7 +7,7 @@ package com.liuballoon.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.pojo.model.CategoryDO;
-import com.liuballoon.pojo.vo.GridCategoryVO;
+import com.liuballoon.pojo.vo.CategoryVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,9 +15,17 @@ import java.util.List;
 @Mapper
 public interface CategoryMapper extends BaseMapper<CategoryDO> {
     /**
-     * 获取所有宫格分类
+     * 获取所有一级类目
      *
      * @return
      */
-    List<GridCategoryVO> getAllGridCategory();
+    List<CategoryDO> selectRootCategories();
+
+    /**
+     * 根据一级类目id获取所有子类目
+     *
+     * @param rootId 一级类目id
+     * @return
+     */
+    List<CategoryVO> selectSubCategoriesByRootId(String rootId);
 }

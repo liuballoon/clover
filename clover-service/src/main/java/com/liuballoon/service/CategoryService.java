@@ -5,15 +5,24 @@
  */
 package com.liuballoon.service;
 
-import com.liuballoon.pojo.vo.GridCategoryVO;
+import com.liuballoon.pojo.vo.CategoryVO;
+import com.liuballoon.pojo.vo.RootCategoryVO;
 
 import java.util.List;
 
 public interface CategoryService {
     /**
-     * 获取所有宫格分类
+     * 获取所有一级类目
      *
      * @return
      */
-    List<GridCategoryVO> getAllGridCategory();
+    List<RootCategoryVO> getRootCategories();
+
+    /**
+     * 根据一级类目id获取所有子类目
+     *
+     * @param rootId 一级类目id
+     * @return
+     */
+    List<CategoryVO> getSubCategories(String rootId);
 }
