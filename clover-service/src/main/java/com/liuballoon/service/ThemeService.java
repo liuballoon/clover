@@ -15,5 +15,5 @@ public interface ThemeService {
      *
      * @return
      */
-    List<ThemeVO> getAllThemes();
+    List<ThemeVO> getThemes();
 }

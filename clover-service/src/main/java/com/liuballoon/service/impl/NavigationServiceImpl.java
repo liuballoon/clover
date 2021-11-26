@@ -21,10 +21,10 @@ public class NavigationServiceImpl implements NavigationService {
     private NavigationMapper navigationMapper;
 
     @Override
-    public List<NavigationVO> getAllNavigations() {
-        List<NavigationVO> navigations = this.navigationMapper.selectAllNavigations();
+    public List<NavigationVO> getNavigations() {
+        List<NavigationVO> navigations = this.navigationMapper.selectNavigations();
         if (navigations.isEmpty()) {
-            throw new NotFoundException(40005);
+            throw new NotFoundException(40004);
         }
         return navigations;
     }

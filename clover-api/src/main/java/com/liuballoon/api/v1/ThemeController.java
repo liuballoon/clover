@@ -27,8 +27,8 @@ public class ThemeController {
 
     @ApiOperation(value = "获取所有专题")
     @GetMapping("/all")
-    public Result getAllThemes() {
-        List<ThemeVO> themes = this.themeService.getAllThemes();
+    public Result getThemes() {
+        List<ThemeVO> themes = this.themeService.getThemes();
         return Result.success(themes);
     }
 }

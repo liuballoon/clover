@@ -19,5 +19,5 @@ public interface ThemeMapper extends BaseMapper<ThemeDO> {
      *
      * @return
      */
-    List<ThemeVO> selectAllThemes();
+    List<ThemeVO> selectThemes();
 }

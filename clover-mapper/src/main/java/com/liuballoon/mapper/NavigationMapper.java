@@ -19,5 +19,5 @@ public interface NavigationMapper extends BaseMapper<NavigationDO> {
      *
      * @return
      */
-    List<NavigationVO> selectAllNavigations();
+    List<NavigationVO> selectNavigations();
 }

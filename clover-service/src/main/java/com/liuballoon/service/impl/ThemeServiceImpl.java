@@ -21,10 +21,10 @@ public class ThemeServiceImpl implements ThemeService {
     private ThemeMapper themeMapper;
 
     @Override
-    public List<ThemeVO> getAllThemes() {
-        List<ThemeVO> themes = this.themeMapper.selectAllThemes();
+    public List<ThemeVO> getThemes() {
+        List<ThemeVO> themes = this.themeMapper.selectThemes();
         if (themes.isEmpty()) {
-            throw new NotFoundException(20005);
+            throw new NotFoundException(20004);
         }
         return themes;
     }

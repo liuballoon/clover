@@ -27,8 +27,8 @@ public class NavigationController {
 
     @ApiOperation(value = "获取所有导航")
     @GetMapping("/all")
-    public Result getAllNavigations() {
-        List<NavigationVO> navigations = this.navigationService.getAllNavigations();
+    public Result getNavigations() {
+        List<NavigationVO> navigations = this.navigationService.getNavigations();
         return Result.success(navigations);
     }
 }

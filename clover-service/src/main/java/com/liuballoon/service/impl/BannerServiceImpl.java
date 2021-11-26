@@ -28,7 +28,7 @@ public class BannerServiceImpl implements BannerService {
 
     @Override
     public BannerVO getBannerByName(String name) {
-        BannerDO bannerDO = this.bannerMapper.selectBannerByName(name).orElseThrow(() -> new NotFoundException(10005));
+        BannerDO bannerDO = this.bannerMapper.selectBannerByName(name).orElseThrow(() -> new NotFoundException(10004));
         List<BannerItemVO> items = this.bannerItemMapper.selectItemsByBannerId(bannerDO.getId());
         return new BannerVO(bannerDO, items);
     }
