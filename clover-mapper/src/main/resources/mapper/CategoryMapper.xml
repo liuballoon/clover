@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liuballoon.mapper.CategoryMapper">
-    <select id="selectAllCategory" resultType="com.liuballoon.pojo.model.CategoryDO">
+    <resultMap autoMapping="true" id="SubCategoriesMap" type="com.liuballoon.pojo.vo.CategoryVO">
+        <id column="id" property="id"/>
+        <collection property="subs" ofType="com.liuballoon.pojo.vo.CategoryVO">
+            <id column="sub_id" property="id"/>
+            <result column="sub_name" property="name"/>
+            <result column="sub_cover_img" property="coverImg"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectRootCategories" resultType="com.liuballoon.pojo.model.CategoryDO">
         SELECT id,
-               pid,
                name,
-               cover_img
+               cover_img,
+               display
         FROM category
         WHERE online = 1
+          AND pid IS NULL
           AND delete_time IS NULL
+    </select>
+
+    <select id="selectSubCategoriesByRootId" resultMap="SubCategoriesMap">
+        SELECT c.id,
+               c.name,
+               c.cover_img,
+               sc.id AS sub_id,
+               sc.name AS sub_name,
+               sc.cover_img AS sub_cover_img
+        FROM category c
+                 LEFT JOIN category sc ON c.id = sc.pid
+        WHERE c.pid = #{rootId}
+          AND c.delete_time IS NULL
     </select>
 </mapper>
