@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class BaseDO {
+public abstract class BaseDO {
     /**
      * 主键
      */
