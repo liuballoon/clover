@@ -13,9 +13,9 @@ import com.liuballoon.common.pojo.PagingParam;
 public class PagingMan {
 
     public static PagingParam convertParams(Integer start, Integer count) {
-        int page = start / count;
+        int pageNum = start / count;
         return PagingParam.builder()
-                .page(page)
+                .pageNum(pageNum)
                 .size(count)
                 .build();
     }
