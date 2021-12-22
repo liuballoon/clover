@@ -5,16 +5,16 @@
  */
 package com.liuballoon.common.utils;
 
-import com.liuballoon.common.pojo.PagingParam;
+import com.liuballoon.common.pojo.PageParam;
 
 /**
  * 分页工具类
  */
-public class PagingMan {
+public class PageMan {
 
-    public static PagingParam convertParams(Integer start, Integer count) {
-        int pageNum = start / count;
-        return PagingParam.builder()
+    public static PageParam convertParams(int start, int count) {
+        int pageNum = start / count + 1;
+        return PageParam.builder()
                 .pageNum(pageNum)
                 .size(count)
                 .build();

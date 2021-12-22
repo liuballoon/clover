@@ -5,21 +5,23 @@
  */
 package com.liuballoon.api.v1;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.liuballoon.common.pojo.PagingParam;
+import com.liuballoon.common.pojo.PageParam;
+import com.liuballoon.common.pojo.Paging;
 import com.liuballoon.common.response.Result;
-import com.liuballoon.common.utils.PagingMan;
-import com.liuballoon.pojo.model.SpuDO;
+import com.liuballoon.common.utils.PageMan;
+import com.liuballoon.pojo.vo.SpuDetailVO;
+import com.liuballoon.pojo.vo.SpuPreviewVO;
 import com.liuballoon.service.SpuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 @Api(tags = "商品")
+@Validated
 @RestController
 @RequestMapping("/spu")
 public class SpuController {
@@ -29,10 +31,17 @@ public class SpuController {
 
     @ApiOperation(value = "分页获取所有商品")
     @GetMapping("/page")
-    public Result getSpuPaging(@RequestParam(defaultValue = "1") Integer start,
-                               @RequestParam(defaultValue = "10") Integer count) {
-        PagingParam param = PagingMan.convertParams(start, count);
-        IPage<SpuDO> spuPaging = this.spuService.getSpuPaging(param.getPageNum(), param.getSize());
+    public Result getSpuPaging(@RequestParam(defaultValue = "0") int start,
+                               @RequestParam(defaultValue = "10") int count) {
+        PageParam param = PageMan.convertParams(start, count);
+        Paging<SpuPreviewVO> spuPaging = this.spuService.getSpuPaging(param.getPageNum(), param.getSize());
         return Result.success(spuPaging);
+    }
+
+    @ApiOperation(value = "根据商品id获取商品详情")
+    @GetMapping("/detail/{spuId}")
+    public Result getSpuDetailById(@PathVariable @NotNull String spuId) {
+        SpuDetailVO spuDetail = this.spuService.getSpuDetailById(spuId);
+        return Result.success(spuDetail);
     }
 }

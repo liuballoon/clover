@@ -12,7 +12,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class PagingParam {
-    private Integer pageNum;
-    private Integer size;
+public class PageParam {
+    private int pageNum;
+    private int size;
 }

@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liuballoon.mapper.SpuMapper">
+    <resultMap autoMapping="true" id="SpuDetailMap" type="com.liuballoon.pojo.vo.SpuDetailVO">
+        <id column="id" property="id"/>
+        <collection property="spuDisplayImages">
+        </collection>
+    </resultMap>
+
+    <select id="getSpuDetailById" resultMap="SpuDetailMap">
+        SELECT spu.id,
+               spu.title,
+               spu.description,
+               spu.cover_img,
+               spu.price,
+               spu.discount_price,
+               spu.tags,
+               sdi.img AS display_img
+        FROM spu
+                 JOIN spu_display_img sdi ON spu.id = sdi.spu_id AND sdi.online = 1 AND sdi.delete_time IS NULL
+        WHERE spu.id = #{spuId}
+          AND spu.online = 1
+          AND spu.delete_time IS NULL
+        ORDER BY sdi.sort
+    </select>
 </mapper>

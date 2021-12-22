@@ -7,8 +7,18 @@ package com.liuballoon.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.pojo.model.SpuDO;
+import com.liuballoon.pojo.vo.SpuDetailVO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.Optional;
 
 @Mapper
 public interface SpuMapper extends BaseMapper<SpuDO> {
+    /**
+     * 根据商品id获取商品详情
+     *
+     * @param spuId 商品id
+     * @return
+     */
+    Optional<SpuDetailVO> getSpuDetailById(String spuId);
 }

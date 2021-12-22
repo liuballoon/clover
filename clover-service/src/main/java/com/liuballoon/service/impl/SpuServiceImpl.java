@@ -8,9 +8,14 @@ package com.liuballoon.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.liuballoon.common.exception.http.NotFoundException;
+import com.liuballoon.common.pojo.Paging;
 import com.liuballoon.mapper.SpuMapper;
 import com.liuballoon.pojo.model.SpuDO;
+import com.liuballoon.pojo.vo.SpuDetailVO;
+import com.liuballoon.pojo.vo.SpuPreviewVO;
 import com.liuballoon.service.SpuService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +26,21 @@ public class SpuServiceImpl implements SpuService {
     private SpuMapper spuMapper;
 
     @Override
-    public IPage<SpuDO> getSpuPaging(Integer pageNum, Integer size) {
-//        var queryWrapper = new LambdaQueryWrapper<SpuDO>();
-//        queryWrapper.isNull(SpuDO::getDeleteTime);
+    public Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size) {
         var queryWrapper = new QueryWrapper<SpuDO>();
-        queryWrapper.isNull("delete_time");
-        Page<SpuDO> page = new Page<>(pageNum, size);
-        IPage<SpuDO> paging = this.spuMapper.selectPage(page, queryWrapper);
-        return paging;
+        queryWrapper.eq("online", true).isNull("delete_time");
+        var page = new Page<SpuDO>(pageNum, size, false);
+        // todo: 待优化
+        IPage<SpuPreviewVO> paging = this.spuMapper.selectPage(page, queryWrapper).convert(spuDO -> {
+            var spuPreview = new SpuPreviewVO();
+            BeanUtils.copyProperties(spuDO, spuPreview);
+            return spuPreview;
+        });
+        return new Paging<>(paging.getCurrent(), paging.getSize(), paging.getRecords().size(), paging.getRecords());
+    }
+
+    @Override
+    public SpuDetailVO getSpuDetailById(String spuId) {
+        return this.spuMapper.getSpuDetailById(spuId).orElseThrow(() -> new NotFoundException(50004));
     }
 }

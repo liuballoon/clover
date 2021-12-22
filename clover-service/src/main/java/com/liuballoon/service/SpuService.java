@@ -5,8 +5,9 @@
  */
 package com.liuballoon.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.liuballoon.pojo.model.SpuDO;
+import com.liuballoon.common.pojo.Paging;
+import com.liuballoon.pojo.vo.SpuDetailVO;
+import com.liuballoon.pojo.vo.SpuPreviewVO;
 
 public interface SpuService {
     /**
@@ -16,5 +17,13 @@ public interface SpuService {
      * @param size 每页的数据量
      * @return
      */
-    IPage<SpuDO> getSpuPaging(Integer pageNum, Integer size);
+    Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size);
+
+    /**
+     * 根据商品id获取商品详情
+     *
+     * @param spuId 商品id
+     * @return
+     */
+    SpuDetailVO getSpuDetailById(String spuId);
 }
