@@ -3,7 +3,11 @@
 <mapper namespace="com.liuballoon.mapper.SpuMapper">
     <resultMap autoMapping="true" id="SpuDetailMap" type="com.liuballoon.pojo.vo.SpuDetailVO">
         <id column="id" property="id"/>
-        <collection property="spuDisplayImages">
+        <collection property="displayImages" ofType="String">
+            <result column="display_img"/>
+        </collection>
+        <collection property="introduceImages" ofType="String">
+            <result column="introduce_img"/>
         </collection>
     </resultMap>
 
@@ -15,12 +19,14 @@
                spu.price,
                spu.discount_price,
                spu.tags,
-               sdi.img AS display_img
+               sd.img AS display_img,
+               si.img AS introduce_img
         FROM spu
-                 JOIN spu_display_img sdi ON spu.id = sdi.spu_id AND sdi.online = 1 AND sdi.delete_time IS NULL
+                 LEFT JOIN spu_display sd ON spu.id = sd.spu_id AND sd.online = 1 AND sd.delete_time IS NULL
+                 LEFT JOIN spu_introduce si ON spu.id = si.spu_id AND si.online = 1 AND si.delete_time IS NULL
         WHERE spu.id = #{spuId}
           AND spu.online = 1
           AND spu.delete_time IS NULL
-        ORDER BY sdi.sort
+        ORDER BY sd.sort, si.sort
     </select>
 </mapper>

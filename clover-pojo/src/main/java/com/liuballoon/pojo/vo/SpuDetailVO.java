@@ -20,5 +20,6 @@ public class SpuDetailVO {
     private String discountPrice;
     private String tags;
     private String description;
-    private List<String> spuDisplayImages;
+    private List<String> displayImages;
+    private List<String> introduceImages;
 }
