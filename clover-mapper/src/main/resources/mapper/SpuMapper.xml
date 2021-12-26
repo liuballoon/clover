@@ -15,7 +15,6 @@
         SELECT spu.id,
                spu.title,
                spu.description,
-               spu.cover_img,
                spu.price,
                spu.discount_price,
                spu.tags,
