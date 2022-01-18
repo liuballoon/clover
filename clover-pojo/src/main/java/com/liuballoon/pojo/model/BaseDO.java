@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,17 +25,17 @@ public abstract class BaseDO {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 更新时间
      */
     @JsonIgnore
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     /**
      * 删除时间
      */
     @JsonIgnore
-    private Date deleteTime;
+    private LocalDateTime deleteTime;
 }

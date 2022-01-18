@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public class UserDO extends BaseDO {
     private String password;
     private String avatar;
     private Integer gender;
-    private Date birthDate;
+    private LocalDateTime birthDate;
     private String phone;
     private String email;
 }
