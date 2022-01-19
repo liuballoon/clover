@@ -13,7 +13,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class HttpException extends RuntimeException {
+public abstract class HttpException extends RuntimeException {
     protected int messageCode;
     protected int statusCode;
 }
