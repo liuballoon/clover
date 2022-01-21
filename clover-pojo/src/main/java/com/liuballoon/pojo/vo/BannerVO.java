@@ -7,11 +7,13 @@ package com.liuballoon.pojo.vo;
 
 import com.liuballoon.pojo.model.BannerDO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 public class BannerVO {

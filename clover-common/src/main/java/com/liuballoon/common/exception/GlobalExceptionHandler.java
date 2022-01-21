@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     public Result handleException(Exception e) {
         int code = 9999;
         String message = this.messageCodesReader.read(code);
-        System.out.println(e);
+        e.printStackTrace();
         return Result.failure(code, message);
     }
 

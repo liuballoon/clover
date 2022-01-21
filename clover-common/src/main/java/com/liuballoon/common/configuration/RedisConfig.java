@@ -23,10 +23,10 @@ public class RedisConfig {
      * @return
      */
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory factory) {
         StringRedisSerializer serializer = new StringRedisSerializer();
         RedisTemplate<String, Object> redis = new RedisTemplate<>();
-        redis.setConnectionFactory(new LettuceConnectionFactory());
+        redis.setConnectionFactory(factory);
         redis.setKeySerializer(serializer);
         redis.setValueSerializer(serializer);
         redis.setHashKeySerializer(serializer);
