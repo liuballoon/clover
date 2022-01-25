@@ -3,16 +3,16 @@ package com.liuballoon.common.enums;
 import java.util.stream.Stream;
 
 /**
- * 用户等级
+ * 登录方式
  */
-public enum UserLevel {
-    VISITOR(0, "游客"),
-    GENERAL(1, "普通用户");
+public enum LoginWay {
+    ACCOUNT(0, "账号登录"),
+    WECHAT(1, "微信登录");
 
     private final int value;
     private final String description;
 
-    UserLevel(int value, String description) {
+    LoginWay(int value, String description) {
         this.value = value;
         this.description = description;
     }
@@ -31,9 +31,9 @@ public enum UserLevel {
      * @param value 枚举值
      * @return 枚举
      */
-    public static UserLevel toType(int value) {
-        return Stream.of(UserLevel.values())
-                .filter(userLevel -> userLevel.getValue() == value)
+    public static LoginWay toType(int value) {
+        return Stream.of(LoginWay.values())
+                .filter(loginWay -> loginWay.getValue() == value)
                 .findAny()
                 .orElse(null);
     }

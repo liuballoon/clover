@@ -13,6 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -43,5 +45,11 @@ public class GlobalExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(Result.failure(e.getMessageCode(), message), headers, httpStatus);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+//        ObjectError error = e.getBindingResult().getAllErrors().get(1);
+        return Result.failure(123, "error.getDefaultMessage()");
     }
 }

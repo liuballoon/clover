@@ -7,8 +7,8 @@ package com.liuballoon.common.exception.http;
 
 public class ServerException extends HttpException {
 
-    public ServerException() {
-        super.messageCode = 9999;
+    public ServerException(int messageCode) {
+        super.messageCode = messageCode;
         super.statusCode = 500;
     }
 }

@@ -6,17 +6,20 @@
 package com.liuballoon.pojo.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @TableName("user")
 public class UserDO extends BaseDO {
-    private String username;
+    private String account;
     private String password;
+    private String nickname;
     private String avatar;
     private Integer gender;
     private LocalDateTime birthDate;
