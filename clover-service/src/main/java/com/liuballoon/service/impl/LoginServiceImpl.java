@@ -7,6 +7,9 @@ package com.liuballoon.service.impl;
 
 import com.liuballoon.common.auth.JWTBuilder;
 import com.liuballoon.common.exception.general.LoginException;
+import com.liuballoon.common.exception.http.ServerException;
+import com.liuballoon.common.utils.RandomUtil;
+import com.liuballoon.common.utils.Serializer;
 import com.liuballoon.mapper.UserMapper;
 import com.liuballoon.pojo.dto.LoginDTO;
 import com.liuballoon.pojo.model.UserDO;
@@ -18,13 +21,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Formatter;
 import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private JWTBuilder jwtBuilder;
 
     @Value("${wechat.appid}")
     private String appId;
@@ -38,21 +43,46 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String accountLogin(LoginDTO loginDTO) {
         if (loginDTO.getPassword() == null) {
-            throw new LoginException(70001);
+            // TODO: 密码为空的验证是否放在拦截器中更加合适？
+            throw new LoginException(70006);
         }
-        return null;
+        UserDO user = this.userMapper.selectUserByAccount(loginDTO.getAccount()).orElseThrow(() -> new LoginException(70004));
+        if (!user.getPassword().equals(loginDTO.getPassword())) {
+            throw new LoginException(70005);
+        }
+        return jwtBuilder.generate(user.getId());
     }
 
     @Override
     public String wechatLogin(LoginDTO loginDTO) {
-        // TODO: 根据session_key请求微信服务器获取open_id并存入用户表
-        String sessionKey = loginDTO.getAccount();
-        String url = new Formatter().format(this.code2session, this.appId, this.secret, sessionKey).toString();
-        Map response = new RestTemplate().getForObject(url, HashMap.class);
-        String token = JWTBuilder.generate();
+        String code = loginDTO.getAccount();
+        String url = new Formatter().format(this.code2session, this.appId, this.secret, code).toString();
+        String res = new RestTemplate().getForObject(url, String.class);
+        // TODO: 解决未参数化的问题
+        HashMap<String, String> response = Serializer.jsonToObject(res, HashMap.class);
+        return this.registerUser(response.get("openid"));
+    }
+
+    /**
+     * 注册用户并生成token
+     *
+     * @param openid 微信openid
+     * @return token
+     */
+    private String registerUser(String openid) {
+        if (openid == null) {
+            throw new ServerException(9001);
+        }
+        String userId = this.userMapper.selectUserIdByOpenid(openid);
+        if (userId != null) {
+            return jwtBuilder.generate(userId);
+        }
         UserDO user = UserDO.builder()
+                .nickname(RandomUtil.nickname())
+                .openid(openid)
+                .gender(0)
                 .build();
         this.userMapper.insert(user);
-        return token;
+        return jwtBuilder.generate(user.getId());
     }
 }
