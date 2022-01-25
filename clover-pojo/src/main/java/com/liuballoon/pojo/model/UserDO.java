@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 public class UserDO extends BaseDO {
     private String account;
     private String password;
+    private String openid;
     private String nickname;
     private String avatar;
     private Integer gender;
