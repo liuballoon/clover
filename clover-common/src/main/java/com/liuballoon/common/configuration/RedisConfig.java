@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
 
     /**
-     * 配置序列化机制
+     * 配置序列化机制，避免可视化工具中显示乱码
      *
      * @return
      */

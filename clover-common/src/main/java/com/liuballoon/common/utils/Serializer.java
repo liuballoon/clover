@@ -7,9 +7,11 @@ package com.liuballoon.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.liuballoon.common.exception.http.NotFoundException;
 import com.liuballoon.common.exception.http.ServerException;
 
+/**
+ * 序列化工具类
+ */
 public class Serializer {
 
     private static ObjectMapper mapper;
@@ -29,7 +31,7 @@ public class Serializer {
             return Serializer.mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerException(9010);
+            throw new ServerException(9101);
         }
     }
 
@@ -45,7 +47,7 @@ public class Serializer {
             return Serializer.mapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerException(9010);
+            throw new ServerException(9101);
         }
     }
 }

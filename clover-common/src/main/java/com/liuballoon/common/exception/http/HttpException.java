@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 自定义HTTP异常
+ * HTTP异常
  */
 @Getter
 @Setter

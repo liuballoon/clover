@@ -15,6 +15,9 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 消息码读取器
+ */
 @Getter
 @Setter
 @Component
