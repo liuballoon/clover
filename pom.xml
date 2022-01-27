@@ -14,14 +14,6 @@
     <artifactId>clover</artifactId>
     <packaging>pom</packaging>
     <version>0.1</version>
-    <modules>
-        <module>clover-main</module>
-        <module>clover-api</module>
-        <module>clover-service</module>
-        <module>clover-mapper</module>
-        <module>clover-pojo</module>
-        <module>clover-common</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuballoon.mapper.SpuMapper">
+    <resultMap autoMapping="true" id="SpuDetailMap" type="com.liuballoon.vo.SpuDetailVO">
+        <id column="id" property="id"/>
+        <collection property="displayImages" ofType="String">
+            <result column="display_img"/>
+        </collection>
+        <collection property="introduceImages" ofType="String">
+            <result column="introduce_img"/>
+        </collection>
+    </resultMap>
+
+    <select id="getSpuDetailById" resultMap="SpuDetailMap">
+        SELECT spu.id,
+               spu.title,
+               spu.description,
+               spu.price,
+               spu.discount_price,
+               spu.tags,
+               sd.img AS display_img,
+               si.img AS introduce_img
+        FROM spu
+                 LEFT JOIN spu_display sd ON spu.id = sd.spu_id AND sd.online = 1 AND sd.delete_time IS NULL
+                 LEFT JOIN spu_introduce si ON spu.id = si.spu_id AND si.online = 1 AND si.delete_time IS NULL
+        WHERE spu.id = #{spuId}
+          AND spu.online = 1
+          AND spu.delete_time IS NULL
+        ORDER BY sd.sort, si.sort
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+server:
+  port: 8086
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/temp?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  redis:
+    host: 39.104.53.160
+    password: clover...123
+    port: 6379
+    database: 0
+
+jwt:
+  issuer: liuballoon
+  secret-key: IjoibGl1aHVhbiJ9  # 密钥
+  expire-time: 10080000
+
+wechat:
+  appid: wx6215591ea679e4b0
+  secret: f237040ad01a0cc3882dfa1e3f05f7e8
+  code2session: https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code
