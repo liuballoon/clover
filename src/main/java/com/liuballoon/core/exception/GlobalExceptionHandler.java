@@ -6,6 +6,7 @@
 package com.liuballoon.core.exception;
 
 import com.liuballoon.common.utils.MessageCodesReader;
+import com.liuballoon.core.exception.general.GeneralException;
 import com.liuballoon.core.exception.http.HttpException;
 import com.liuballoon.core.response.Result;
 import org.springframework.beans.factory.annotation.Autowired;
