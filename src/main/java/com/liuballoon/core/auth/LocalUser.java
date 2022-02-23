@@ -11,18 +11,36 @@ public class LocalUser {
 
     private static final ThreadLocal<UserDO> local = new ThreadLocal<>();
 
-    public static void setUser(UserDO user) {
+    /**
+     * 保存用户
+     *
+     * @param user 用户
+     */
+    public static void set(UserDO user) {
         LocalUser.local.set(user);
     }
 
-    public static UserDO getUser() {
+    /**
+     * 获取用户
+     *
+     * @return 用户
+     */
+    public static UserDO get() {
         return LocalUser.local.get();
     }
 
+    /**
+     * 获取用户等级
+     *
+     * @return 用户等级
+     */
     public static Integer getLevel() {
         return LocalUser.local.get().getLevel();
     }
 
+    /**
+     * 清空
+     */
     public static void clear() {
         LocalUser.local.remove();
     }

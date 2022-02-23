@@ -8,11 +8,15 @@ package com.liuballoon.core.auth;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.liuballoon.core.exception.http.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Map;
 
@@ -43,23 +47,37 @@ public class JWTBuilder {
         return JWT.create()
                 .withIssuer(this.issuer)
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(this.expireTime))
+                .withExpiresAt(this.getExpireTime())
                 .withClaim("userId", userId)
                 .withClaim("userLevel", userLevel)
                 .sign(algorithm);
     }
 
     /**
-     * 验证token
+     * 获取token claims
      *
      * @param token token
-     * @return ture false
+     * @return claims
      */
-    public boolean verify(String token) {
+    public Map<String, Claim> getClaims(String token) {
         Algorithm algorithm = Algorithm.HMAC256(this.secretKey);
         JWTVerifier jwtVerifier = JWT.require(algorithm).build();
-        DecodedJWT decodedJWT = jwtVerifier.verify(token);
-        Map<String, Claim> claims = decodedJWT.getClaims();
-        return true;
+        DecodedJWT decodedJWT;
+        try {
+            decodedJWT = jwtVerifier.verify(token);
+            return decodedJWT.getClaims();
+        } catch (JWTVerificationException e) {
+            throw new UnauthorizedException(70002);
+        }
+    }
+
+    /**
+     * 获取过期时间
+     *
+     * @return 过期时间
+     */
+    private Date getExpireTime() {
+        LocalDateTime expireTime = LocalDateTime.now().plusSeconds(this.expireTime);
+        return Date.from(expireTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }
