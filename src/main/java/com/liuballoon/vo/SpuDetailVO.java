@@ -21,4 +21,5 @@ public class SpuDetailVO {
     private String description;
     private List<String> displayImages;
     private List<String> introduceImages;
+    private List<SkuVO> skuList;
 }
