@@ -9,6 +9,9 @@
         <collection property="introduceImages" ofType="String">
             <result column="introduce_img"/>
         </collection>
+        <collection property="skuList" ofType="com.liuballoon.vo.SkuVO">
+            <id column="id" property="id"/>
+        </collection>
     </resultMap>
 
     <select id="getSpuDetailById" resultMap="SpuDetailMap">
@@ -19,10 +22,12 @@
                spu.discount_price,
                spu.tags,
                sd.img AS display_img,
-               si.img AS introduce_img
+               si.img AS introduce_img,
+               sku.* AS sku_list
         FROM spu
                  LEFT JOIN spu_display sd ON spu.id = sd.spu_id AND sd.online = 1 AND sd.delete_time IS NULL
                  LEFT JOIN spu_introduce si ON spu.id = si.spu_id AND si.online = 1 AND si.delete_time IS NULL
+                 LEFT JOIN sku ON spu.id = sku.spu_id AND sku.online = 1 AND sku.delete_time IS NULL
         WHERE spu.id = #{spuId}
           AND spu.online = 1
           AND spu.delete_time IS NULL
