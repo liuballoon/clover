@@ -1,4 +1,4 @@
-package com.liuballoon.core.enums;
+package com.liuballoon.common.enums;
 
 import java.util.Arrays;
 

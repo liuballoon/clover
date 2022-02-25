@@ -3,7 +3,7 @@
  * @Github https://github.com/liuballoon
  * @Create 2022/1/27 9:42
  */
-package com.liuballoon.core.enums;
+package com.liuballoon.common.enums;
 
 /**
  * 查询用户方式
