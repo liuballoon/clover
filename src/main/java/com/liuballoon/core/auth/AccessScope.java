@@ -1,6 +1,6 @@
 package com.liuballoon.core.auth;
 
-import com.liuballoon.core.enums.UserLevel;
+import com.liuballoon.common.enums.UserLevel;
 
 import java.lang.annotation.*;
 

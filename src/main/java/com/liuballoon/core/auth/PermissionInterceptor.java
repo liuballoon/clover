@@ -1,7 +1,7 @@
 package com.liuballoon.core.auth;
 
 import com.auth0.jwt.interfaces.Claim;
-import com.liuballoon.core.enums.SelectBy;
+import com.liuballoon.common.enums.SelectBy;
 import com.liuballoon.core.exception.http.ForbiddenException;
 import com.liuballoon.core.exception.http.UnauthorizedException;
 import com.liuballoon.model.UserDO;

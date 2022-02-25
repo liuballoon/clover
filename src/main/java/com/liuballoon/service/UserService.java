@@ -6,7 +6,7 @@
 package com.liuballoon.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.liuballoon.core.enums.SelectBy;
+import com.liuballoon.common.enums.SelectBy;
 import com.liuballoon.model.UserDO;
 
 public interface UserService extends IService<UserDO> {

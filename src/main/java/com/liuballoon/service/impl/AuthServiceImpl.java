@@ -5,7 +5,7 @@
  */
 package com.liuballoon.service.impl;
 
-import com.liuballoon.core.enums.LoginWay;
+import com.liuballoon.common.enums.LoginWay;
 import com.liuballoon.dto.LoginDTO;
 import com.liuballoon.service.AuthService;
 import com.liuballoon.service.LoginService;

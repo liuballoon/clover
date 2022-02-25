@@ -6,7 +6,7 @@
 package com.liuballoon.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.liuballoon.core.enums.SelectBy;
+import com.liuballoon.common.enums.SelectBy;
 import com.liuballoon.mapper.UserMapper;
 import com.liuballoon.model.UserDO;
 import com.liuballoon.service.UserService;

@@ -5,8 +5,6 @@
  */
 package com.liuballoon.api;
 
-import com.liuballoon.core.auth.AccessScope;
-import com.liuballoon.core.enums.UserLevel;
 import com.liuballoon.core.response.Result;
 import com.liuballoon.service.BannerService;
 import com.liuballoon.vo.BannerVO;
@@ -31,7 +29,6 @@ public class BannerController {
     private BannerService bannerService;
 
     @ApiOperation(value = "根据名称获取轮播图")
-    @AccessScope(UserLevel.GENERAL)
     @GetMapping("/name/{name}")
     public Result getBannerByName(@PathVariable @NotNull String name) {
         BannerVO bannerVO = this.bannerService.getBannerByName(name);

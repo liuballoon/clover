@@ -5,10 +5,14 @@
  */
 package com.liuballoon.vo;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.liuballoon.common.utils.Serializer;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +22,21 @@ public class SkuVO {
     private String title;
     private String previewImg;
     private BigDecimal price;
+    private BigDecimal discountPrice;
+    private String spec;
     private Integer stock;
     private String param;
     private String description;
+
+    public List<SpecVO> getSpec() {
+        if (this.spec == null) {
+            return Collections.emptyList();
+        }
+        return Serializer.jsonToObject(this.spec, new TypeReference<>() {
+        });
+    }
+
+    public void setSpec(List<SpecVO> spec) {
+        this.spec = Serializer.objectToJson(spec);
+    }
 }

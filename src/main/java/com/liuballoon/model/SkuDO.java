@@ -18,7 +18,6 @@ public class SkuDO extends BaseDO {
     private String previewImg;
     private BigDecimal price;
     private Integer stock;
-    private String param;
     private Boolean online;
     private String description;
 }
