@@ -37,6 +37,10 @@ public class SkuVO {
     }
 
     public void setSpec(List<SpecVO> spec) {
+        if (spec.isEmpty()) {
+            this.spec = null;
+            return;
+        }
         this.spec = Serializer.objectToJson(spec);
     }
 }

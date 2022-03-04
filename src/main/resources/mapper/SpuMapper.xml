@@ -9,8 +9,9 @@
         <collection property="introduceImages" ofType="String">
             <result column="introduce_img"/>
         </collection>
-        <collection property="skuList" ofType="com.liuballoon.vo.SkuVO">
-            <id column="id" property="id"/>
+        <collection autoMapping="true" property="skuList" ofType="com.liuballoon.vo.SkuVO">
+            <id column="sku_id" property="id"/>
+            <result column="spu_id" property="spuId"/>
         </collection>
     </resultMap>
 
@@ -23,7 +24,8 @@
                spu.tags,
                sd.img AS display_img,
                si.img AS introduce_img,
-               sku.* AS sku_list
+               sku.id AS sku_id,
+               sku.spu_id AS spu_id
         FROM spu
                  LEFT JOIN spu_display sd ON spu.id = sd.spu_id AND sd.online = 1 AND sd.delete_time IS NULL
                  LEFT JOIN spu_introduce si ON spu.id = si.spu_id AND si.online = 1 AND si.delete_time IS NULL

@@ -30,7 +30,6 @@ public class SpuServiceImpl implements SpuService {
         var queryWrapper = new QueryWrapper<SpuDO>();
         queryWrapper.eq("online", true).isNull("delete_time");
         var page = new Page<SpuDO>(pageNum, size, false);
-        // todo: 待优化
         IPage<SpuPreviewVO> paging = this.spuMapper.selectPage(page, queryWrapper).convert(spuDO -> {
             var spuPreview = new SpuPreviewVO();
             BeanUtils.copyProperties(spuDO, spuPreview);

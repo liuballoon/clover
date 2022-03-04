@@ -15,7 +15,7 @@ spring:
 jwt:
   issuer: liuballoon
   secret-key: IjoibGl1aHVhbiJ9  # 密钥
-  expire-time: 10080000
+  expire-time: 604800
 
 wechat:
   appid: wx6215591ea679e4b0
