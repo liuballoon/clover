@@ -6,7 +6,6 @@
 package com.liuballoon.core.exception;
 
 import com.liuballoon.common.utils.MessageCodesReader;
-import com.liuballoon.core.exception.general.GeneralException;
 import com.liuballoon.core.exception.http.HttpException;
 import com.liuballoon.core.response.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +13,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.List;
 
 /**
  * 全局异常统一处理器
@@ -49,7 +51,23 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-//        ObjectError error = e.getBindingResult().getAllErrors().get(1);
-        return Result.failure(123, "error.getDefaultMessage()");
+        int code = 9201;
+        List<ObjectError> errors = e.getBindingResult().getAllErrors();
+        String message = this.formatErrorsMessages(errors);
+        return Result.failure(code, message);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private String formatErrorsMessages(List<ObjectError> errors) {
+        StringBuilder message = new StringBuilder();
+        int length = errors.size();
+        for (var i = 0; i < length; i++) {
+            message.append(errors.get(i).getDefaultMessage());
+            if (i == length - 1) {
+                break;
+            }
+            message.append(", ");
+        }
+        return message.toString();
     }
 }
