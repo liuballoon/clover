@@ -23,20 +23,15 @@ public class SkuVO {
     private String previewImg;
     private BigDecimal price;
     private BigDecimal discountPrice;
-    private String spec;
+    private String specs;
     private Integer stock;
-    private String param;
     private String description;
 
-    public List<SpecVO> getSpec() {
-        if (this.spec == null) {
+    public List<SpecVO> getSpecs() {
+        if (this.specs == null) {
             return Collections.emptyList();
         }
-        return Serializer.jsonToObject(this.spec, new TypeReference<>() {
+        return Serializer.jsonToObject(this.specs, new TypeReference<>() {
         });
-    }
-
-    public void setSpec(List<SpecVO> spec) {
-        this.spec = Serializer.objectToJson(spec);
     }
 }

@@ -5,11 +5,13 @@
  */
 package com.liuballoon.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class SpuDetailVO {
