@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 23/12/2021 17:29:44
+ Date: 29/04/2022 19:42:27
 */
 
 SET NAMES utf8mb4;
@@ -29,6 +29,7 @@ CREATE TABLE `address`  (
   `province` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '省区',
   `city` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '市区',
   `detail_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '详细地址',
+  `default` tinyint NULL DEFAULT 0 COMMENT '是否为默认地址（0否 1是）',
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `delete_time` datetime NULL DEFAULT NULL COMMENT '删除时间',
@@ -83,6 +84,24 @@ CREATE TABLE `banner_item`  (
 INSERT INTO `banner_item` VALUES ('1451834093616367550', '1454834043657367554', '健身', 'https://aecpm.alicdn.com/imgextra/i3/3569880176/O1CN016ryher1DAeNcZKXEo_!!3569880176-0-alimamazszw.jpg', 1, 't1', 0, '2021-11-01 10:30:23', '2021-11-23 23:32:01', NULL);
 INSERT INTO `banner_item` VALUES ('1454834013657363554', '1454834043657367554', '美食狂欢', 'https://img.mukewang.com/user/60c876710001dbc607500390.jpg', 1, 't1', 1, '2021-11-01 10:27:08', '2021-11-23 23:31:57', NULL);
 INSERT INTO `banner_item` VALUES ('1454834073647363556', '1454834043657367554', '家居', 'https://img.mukewang.com/user/60c8766f0001d37e07500390.jpg', 1, 't1', 2, '2021-11-01 10:29:52', '2021-11-23 23:31:28', NULL);
+
+-- ----------------------------
+-- Table structure for cart
+-- ----------------------------
+DROP TABLE IF EXISTS `cart`;
+CREATE TABLE `cart`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户主键',
+  `sku_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '单品主键',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `delete_time` datetime NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '购物车表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for category
@@ -198,6 +217,97 @@ CREATE TABLE `navigation`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户主键',
+  `order_num` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '订单编号',
+  `total_price` decimal(10, 2) NOT NULL COMMENT '商品总价',
+  `pay_price` decimal(10, 2) NOT NULL COMMENT '实付款',
+  `address_snapshot` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址快照',
+  `status` tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '订单状态（0已取消 1待支付 2待收货 3已完成）',
+  `online` tinyint UNSIGNED NOT NULL DEFAULT 1 COMMENT '是否在线（0否 1是）',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `delete_time` datetime NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订单表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for shop
+-- ----------------------------
+DROP TABLE IF EXISTS `shop`;
+CREATE TABLE `shop`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '店铺名称',
+  `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商标',
+  `account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '账号',
+  `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
+  `salt` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '盐',
+  `level` tinyint UNSIGNED NOT NULL DEFAULT 0 COMMENT '店铺等级',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
+  `online` tinyint NOT NULL DEFAULT 1 COMMENT '是否在线（0否 1是）',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '描述',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `delete_time` datetime NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '店铺表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of shop
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sku
+-- ----------------------------
+DROP TABLE IF EXISTS `sku`;
+CREATE TABLE `sku`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `spu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品主键',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标题',
+  `preview_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '展示图',
+  `price` decimal(10, 2) NOT NULL COMMENT '价格',
+  `discount_price` decimal(10, 2) NULL DEFAULT NULL COMMENT '折扣价',
+  `specs` json NULL COMMENT '规格',
+  `stock` int NOT NULL COMMENT '库存',
+  `online` tinyint NOT NULL DEFAULT 1 COMMENT '是否在线（0否 1是）',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `delete_time` datetime NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '单品表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sku
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sku_spec
+-- ----------------------------
+DROP TABLE IF EXISTS `sku_spec`;
+CREATE TABLE `sku_spec`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `spu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '商品主键',
+  `sku_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '单品主键',
+  `key_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规格名主键',
+  `value_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规格值主键',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '单品规格表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sku_spec
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for spec_key
 -- ----------------------------
 DROP TABLE IF EXISTS `spec_key`;
@@ -215,6 +325,11 @@ CREATE TABLE `spec_key`  (
 -- ----------------------------
 -- Records of spec_key
 -- ----------------------------
+INSERT INTO `spec_key` VALUES ('1', '颜色', NULL, 1, '2022-01-24 13:55:53', '2022-01-24 13:55:53', NULL);
+INSERT INTO `spec_key` VALUES ('2', '尺寸', NULL, 1, '2022-01-24 13:56:11', '2022-01-24 13:56:11', NULL);
+INSERT INTO `spec_key` VALUES ('3', '屏幕尺寸', '英寸', 1, '2022-01-24 13:56:57', '2022-01-24 13:56:57', NULL);
+INSERT INTO `spec_key` VALUES ('4', '型号', NULL, 1, '2022-01-24 13:57:23', '2022-01-24 13:57:23', NULL);
+INSERT INTO `spec_key` VALUES ('5', '口味', NULL, 1, '2022-01-24 13:57:38', '2022-01-24 13:57:38', NULL);
 
 -- ----------------------------
 -- Table structure for spec_value
@@ -234,6 +349,11 @@ CREATE TABLE `spec_value`  (
 -- ----------------------------
 -- Records of spec_value
 -- ----------------------------
+INSERT INTO `spec_value` VALUES ('1', 1, '红色', 1, '2022-01-24 13:58:13', '2022-01-24 13:58:13', NULL);
+INSERT INTO `spec_value` VALUES ('2', 1, '绿色', 1, '2022-01-24 13:58:20', '2022-01-24 13:58:20', NULL);
+INSERT INTO `spec_value` VALUES ('3', 1, '蓝色', 1, '2022-01-24 13:58:27', '2022-01-24 13:58:27', NULL);
+INSERT INTO `spec_value` VALUES ('4', 3, '11.9寸', 1, '2022-01-24 13:58:46', '2022-01-24 13:59:18', NULL);
+INSERT INTO `spec_value` VALUES ('5', 3, '17.3寸', 1, '2022-01-24 13:58:58', '2022-01-24 13:59:22', NULL);
 
 -- ----------------------------
 -- Table structure for spu
@@ -241,6 +361,8 @@ CREATE TABLE `spec_value`  (
 DROP TABLE IF EXISTS `spu`;
 CREATE TABLE `spu`  (
   `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `shop_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '店铺主键',
+  `category_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '类目主键',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标题',
   `cover_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '封面图',
   `price` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '价格',
@@ -257,20 +379,20 @@ CREATE TABLE `spu`  (
 -- ----------------------------
 -- Records of spu
 -- ----------------------------
-INSERT INTO `spu` VALUES ('1', '解放橘郡 像你的人100ml', 'https://gd2.alicdn.com/imgextra/i2/2368381957/O1CN01C2no491QKLm7gM5YA_!!2368381957.jpg_400x400.jpg', '699', NULL, '薄荷味', 1, '我遇见的都是像你的人', '2021-12-21 23:35:25', '2021-12-23 17:13:38', NULL);
-INSERT INTO `spu` VALUES ('10', '马氏皇庭 北欧皮布冬夏两用沙发', 'https://img.alicdn.com/imgextra/i2/823349039/O1CN01ulbtcW2GdueiD3JQs_!!823349039-0-lubanu-s.jpg_430x430q90.jpg', '12299', NULL, NULL, 1, '皮布双面设计 白蜡木实木脚 水性漆', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('11', '源氏木语实木茶几北欧橡木茶台', 'https://img.alicdn.com/imgextra/i2/1105025069/TB2iN0RqxGYBuNjy0FnXXX5lpXa_!!1105025069.jpg_430x430q90.jpg', '1268', NULL, NULL, 1, '进口FAS级橡木 圆润倒角 榫卯整装', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('12', '周大福星情侣对戒正品PT950铂金戒指', 'https://gd4.alicdn.com/imgextra/i1/0/O1CN01xt7D3S1Rr9kI7g2Rc_!!0-item_pic.jpg_400x400.jpg', '530', NULL, NULL, 1, '求婚白金莫桑石钻戒素圈男女\r\n', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('13', 'COGU陀飞轮手表男士机械表镂空', 'https://img.alicdn.com/imgextra/i4/3236722345/TB2WWS1tr0kpuFjy0FjXXcBbVXa_!!3236722345.jpg_430x430q90.jpg', '99800', NULL, NULL, 1, '陀飞轮机械机芯，表盘镶嵌10颗钻石', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('14', '拿火吉他LAVA ME 2碳纤维民谣吉他初学者入门学生36寸男女', 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2487209081/O1CN01xOHP4W2Gx9HJtE8ez_!!2487209081.jpg_430x430q90.jpg', '2888', NULL, '吉他', 1, '全新FreeBoost功能', '2021-12-21 23:35:25', '2021-12-23 17:13:51', NULL);
-INSERT INTO `spu` VALUES ('2', 'Leopold 利奥博德FC980M机械键盘', 'https://img.alicdn.com/imgextra/i1/3671215664/O1CN012J7CfY1ri9yj9W3ay_!!3671215664.jpg_430x430q90.jpg', '1199', '1099', NULL, 1, '属于你的退烧键盘', '2021-12-21 23:35:25', '2021-12-23 15:00:15', NULL);
-INSERT INTO `spu` VALUES ('3', '时尚针织衫', 'https://gd3.alicdn.com/imgextra/i3/2602370342/O1CN01MSV3091EOg7IndHfy_!!2602370342.png_400x400.jpg', '77', NULL, NULL, 1, '', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('4', '金士顿HyperX Cloud Flight天箭', 'https://img.alicdn.com/imgextra/i1/704392951/O1CN01MxUxOP1XfbTWDoYrW_!!704392951-0-picasso.jpg_430x430q90.jpg', '869', NULL, '无线#续航', 1, '2.4Ghz电竞级无线 30h长效电力 舒适不压头', '2021-12-21 23:35:25', '2021-12-23 17:14:03', NULL);
-INSERT INTO `spu` VALUES ('5', '2021新款ipadpro11保护套带笔槽', 'https://img.alicdn.com/imgextra/i4/1779343388/O1CN016nAyWM1atkWln1and_!!1779343388.jpg_430x430q90.jpg', '69', NULL, NULL, 1, '硅胶第二代硬壳全包防摔透明', '2021-12-21 23:35:25', '2021-12-21 23:36:53', NULL);
-INSERT INTO `spu` VALUES ('6', 'Steelseries赛睿 Aerox 3系列', 'https://img.alicdn.com/imgextra/i3/4037368186/O1CN01chKYfg2ALEr6FJjnM_!!4037368186.jpg_430x430q90.jpg', '749', NULL, NULL, 1, '超轻量化设计 TrueMove Air 光学游戏传感器', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('7', '向往镇东隆咚首本个人插画集', 'https://gd3.alicdn.com/imgextra/i4/3470811498/O1CN0130nmhT1Mw7z7EXpHZ_!!3470811498.jpg_400x400.jpg', '98', NULL, NULL, 1, '温馨治愈清新可爱', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('8', 'CHANEL香奈儿炫亮魅力丝绒唇膏狮子系列', 'https://img.alicdn.com/imgextra/i3/4207517744/O1CN01RPRpOu274niVyRqok_!!0-item_pic.jpg_430x430q90.jpg', '340', NULL, NULL, 1, '', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
-INSERT INTO `spu` VALUES ('9', '纪梵希散粉蜜粉四宫格1号2#5#7', 'https://img.alicdn.com/imgextra/i3/692011888/O1CN016kyAa91PokK55qpC4_!!692011888.jpg_400x400.jpg', '388', NULL, NULL, 1, '定妆控油轻盈无痕细腻持久', '2021-12-21 23:35:25', '2021-12-21 23:35:25', NULL);
+INSERT INTO `spu` VALUES ('1', '1', NULL, '解放橘郡 像你的人100ml', 'https://gd2.alicdn.com/imgextra/i2/2368381957/O1CN01C2no491QKLm7gM5YA_!!2368381957.jpg_400x400.jpg', '699', NULL, '薄荷味', 1, '我遇见的都是像你的人', '2021-12-21 23:35:25', '2022-04-28 14:21:06', NULL);
+INSERT INTO `spu` VALUES ('10', '1', NULL, '马氏皇庭 北欧皮布冬夏两用沙发', 'https://img.alicdn.com/imgextra/i2/823349039/O1CN01ulbtcW2GdueiD3JQs_!!823349039-0-lubanu-s.jpg_430x430q90.jpg', '12299', NULL, NULL, 1, '皮布双面设计 白蜡木实木脚 水性漆', '2021-12-21 23:35:25', '2022-04-28 14:21:07', NULL);
+INSERT INTO `spu` VALUES ('11', '1', NULL, '源氏木语实木茶几北欧橡木茶台', 'https://img.alicdn.com/imgextra/i2/1105025069/TB2iN0RqxGYBuNjy0FnXXX5lpXa_!!1105025069.jpg_430x430q90.jpg', '1268', NULL, NULL, 1, '进口FAS级橡木 圆润倒角 榫卯整装', '2021-12-21 23:35:25', '2022-04-28 14:21:07', NULL);
+INSERT INTO `spu` VALUES ('12', '1', NULL, '周大福星情侣对戒正品PT950铂金戒指', 'https://gd4.alicdn.com/imgextra/i1/0/O1CN01xt7D3S1Rr9kI7g2Rc_!!0-item_pic.jpg_400x400.jpg', '530', NULL, NULL, 1, '求婚白金莫桑石钻戒素圈男女\r\n', '2021-12-21 23:35:25', '2022-04-28 14:21:08', NULL);
+INSERT INTO `spu` VALUES ('13', '1', NULL, 'COGU陀飞轮手表男士机械表镂空', 'https://img.alicdn.com/imgextra/i4/3236722345/TB2WWS1tr0kpuFjy0FjXXcBbVXa_!!3236722345.jpg_430x430q90.jpg', '99800', NULL, NULL, 1, '陀飞轮机械机芯，表盘镶嵌10颗钻石', '2021-12-21 23:35:25', '2022-04-28 14:21:08', NULL);
+INSERT INTO `spu` VALUES ('14', '1', NULL, '拿火吉他LAVA ME 2碳纤维民谣吉他初学者入门学生36寸男女', 'https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/2487209081/O1CN01xOHP4W2Gx9HJtE8ez_!!2487209081.jpg_430x430q90.jpg', '2888', NULL, '吉他', 1, '全新FreeBoost功能', '2021-12-21 23:35:25', '2022-04-28 14:21:13', NULL);
+INSERT INTO `spu` VALUES ('2', '1', NULL, 'Leopold 利奥博德FC980M机械键盘', 'https://img.alicdn.com/imgextra/i1/3671215664/O1CN012J7CfY1ri9yj9W3ay_!!3671215664.jpg_430x430q90.jpg', '1199', '1099', NULL, 1, '属于你的退烧键盘', '2021-12-21 23:35:25', '2022-04-28 14:21:10', NULL);
+INSERT INTO `spu` VALUES ('3', '1', NULL, '时尚针织衫', 'https://gd3.alicdn.com/imgextra/i3/2602370342/O1CN01MSV3091EOg7IndHfy_!!2602370342.png_400x400.jpg', '77', NULL, NULL, 1, '', '2021-12-21 23:35:25', '2022-04-28 14:21:13', NULL);
+INSERT INTO `spu` VALUES ('4', '1', NULL, '金士顿HyperX Cloud Flight天箭', 'https://img.alicdn.com/imgextra/i1/704392951/O1CN01MxUxOP1XfbTWDoYrW_!!704392951-0-picasso.jpg_430x430q90.jpg', '869', NULL, '无线#续航', 1, '2.4Ghz电竞级无线 30h长效电力 舒适不压头', '2021-12-21 23:35:25', '2022-04-28 14:21:14', NULL);
+INSERT INTO `spu` VALUES ('5', '1', NULL, '2021新款ipadpro11保护套带笔槽', 'https://img.alicdn.com/imgextra/i4/1779343388/O1CN016nAyWM1atkWln1and_!!1779343388.jpg_430x430q90.jpg', '69', NULL, NULL, 1, '硅胶第二代硬壳全包防摔透明', '2021-12-21 23:35:25', '2022-04-28 14:21:14', NULL);
+INSERT INTO `spu` VALUES ('6', '1', NULL, 'Steelseries赛睿 Aerox 3系列', 'https://img.alicdn.com/imgextra/i3/4037368186/O1CN01chKYfg2ALEr6FJjnM_!!4037368186.jpg_430x430q90.jpg', '749', NULL, NULL, 1, '超轻量化设计 TrueMove Air 光学游戏传感器', '2021-12-21 23:35:25', '2022-04-28 14:21:14', NULL);
+INSERT INTO `spu` VALUES ('7', '1', NULL, '向往镇东隆咚首本个人插画集', 'https://gd3.alicdn.com/imgextra/i4/3470811498/O1CN0130nmhT1Mw7z7EXpHZ_!!3470811498.jpg_400x400.jpg', '98', NULL, NULL, 1, '温馨治愈清新可爱', '2021-12-21 23:35:25', '2022-04-28 14:21:15', NULL);
+INSERT INTO `spu` VALUES ('8', '1', NULL, 'CHANEL香奈儿炫亮魅力丝绒唇膏狮子系列', 'https://img.alicdn.com/imgextra/i3/4207517744/O1CN01RPRpOu274niVyRqok_!!0-item_pic.jpg_430x430q90.jpg', '340', NULL, NULL, 1, '', '2021-12-21 23:35:25', '2022-04-28 14:21:15', NULL);
+INSERT INTO `spu` VALUES ('9', '1', NULL, '纪梵希散粉蜜粉四宫格1号2#5#7', 'https://img.alicdn.com/imgextra/i3/692011888/O1CN016kyAa91PokK55qpC4_!!692011888.jpg_400x400.jpg', '388', NULL, NULL, 1, '定妆控油轻盈无痕细腻持久', '2021-12-21 23:35:25', '2022-04-28 14:21:16', NULL);
 
 -- ----------------------------
 -- Table structure for spu_display
@@ -371,14 +493,18 @@ CREATE TABLE `theme`  (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '主键',
+  `account` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '账号',
+  `password` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
+  `salt` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '盐',
+  `openid` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '微信openid',
+  `level` tinyint UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户等级',
   `nickname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '昵称',
-  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '头像',
-  `gender` tinyint UNSIGNED NULL DEFAULT 0 COMMENT '性别（0保密 1男 2女）',
+  `gender` tinyint UNSIGNED NOT NULL DEFAULT 0 COMMENT '性别（0保密 1男 2女）',
   `birth_date` date NULL DEFAULT NULL COMMENT '出生日期',
   `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号码',
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
+  `online` tinyint NOT NULL DEFAULT 1 COMMENT '是否在线（0否 1是）',
   `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `delete_time` datetime NULL DEFAULT NULL COMMENT '删除时间',
@@ -388,5 +514,6 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('1486189231508992001', NULL, NULL, NULL, 'oy2qu5TzAOAdCEEhtYDrp2Ak-znk', 0, 'temp_237yuu0d0626r8', NULL, 0, NULL, NULL, NULL, 1, '2022-01-26 12:08:19', '2022-01-26 12:08:19', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
