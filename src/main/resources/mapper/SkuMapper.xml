@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liuballoon.mapper.SkuMapper">
+    <sql id="baseColumn">
+        id, spu_id, title, preview_img, price, discount_price, specs, stock, description
+    </sql>
+
     <select id="selectSkuListBySpuId" resultType="com.liuballoon.vo.SkuVO">
-        SELECT id,
-               spu_id,
-               title,
-               preview_img,
-               price,
-               discount_price,
-               specs,
-               stock,
-               description
+        SELECT
+        <include refid="baseColumn"/>
         FROM sku
         WHERE spu_id = #{spuId}
-          AND online = 1
-          AND delete_time IS NULL
+        AND online = 1
+        AND delete_time IS NULL
     </select>
 </mapper>

@@ -16,6 +16,7 @@ import java.util.List;
 @Setter
 public class SpuDetailVO {
     private String id;
+    private String shopId;
     private String title;
     private String price;
     private String discountPrice;

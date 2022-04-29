@@ -49,6 +49,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(Result.failure(e.getMessageCode(), message), headers, httpStatus);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         int code = 9201;
@@ -57,7 +58,12 @@ public class GlobalExceptionHandler {
         return Result.failure(code, message);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    /**
+     * 格式化 MethodArgumentNotValidException 的错误信息
+     *
+     * @param errors 错误列表
+     * @return 格式化信息
+     */
     private String formatErrorsMessages(List<ObjectError> errors) {
         StringBuilder message = new StringBuilder();
         int length = errors.size();

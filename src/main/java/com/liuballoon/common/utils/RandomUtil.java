@@ -7,19 +7,21 @@ package com.liuballoon.common.utils;
 
 import java.util.Random;
 
+/**
+ * 随机生成工具集
+ */
 public class RandomUtil {
 
     /**
-     * 随机生成昵称
+     * 随机生成指定长度的字符串
      *
-     * @return 昵称
+     * @param length 长度
+     * @return
      */
-    public static String nickname() {
-        String head = "temp_";
-        int length = 14;
+    public static String generateString(int length) {
         Random random = new Random();
-        StringBuilder nickname = new StringBuilder(head);
-        for (int i = 0; i < length; i++) {
+        StringBuilder nickname = new StringBuilder();
+        for (var i = 0; i < length; i++) {
             int param = random.nextInt(2);
             switch (param) {
                 case 0 -> nickname.append((char) random.nextInt(97, 123));

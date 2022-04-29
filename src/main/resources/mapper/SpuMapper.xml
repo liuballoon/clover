@@ -13,6 +13,7 @@
 
     <select id="getSpuDetailById" resultMap="SpuDetailMap">
         SELECT spu.id,
+               spu.shop_id,
                spu.title,
                spu.description,
                spu.price,

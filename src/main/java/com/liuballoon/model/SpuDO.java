@@ -13,6 +13,7 @@ import lombok.Setter;
 @Setter
 @TableName("spu")
 public class SpuDO extends BaseDO {
+    private String shopId;
     private String title;
     private String coverImg;
     private String price;
