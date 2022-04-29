@@ -1,25 +1,25 @@
 /**
  * @Author liuballoon
  * @Github https://github.com/liuballoon
- * @Create 2021/11/28 14:10
+ * @Create 2022/4/29 13:38
  */
 package com.liuballoon.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.liuballoon.model.SpuDO;
-import com.liuballoon.vo.SpuDetailVO;
+import com.liuballoon.model.ShopDO;
+import com.liuballoon.vo.ShopDetailVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Optional;
 
 @Mapper
-public interface SpuMapper extends BaseMapper<SpuDO> {
+public interface ShopMapper extends BaseMapper<ShopDO> {
     /**
-     * 根据商品id获取商品详情
+     * 根据店铺主键获取店铺详情
      *
-     * @param spuId 商品id
+     * @param shopId 店铺主键
      * @return
      */
-    Optional<SpuDetailVO> getSpuDetailById(@Param("spuId") String spuId);
+    Optional<ShopDetailVO> selectShopDetailById(@Param("shopId") String shopId);
 }

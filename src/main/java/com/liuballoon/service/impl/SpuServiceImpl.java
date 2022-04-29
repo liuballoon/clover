@@ -10,20 +10,27 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liuballoon.common.pojo.Paging;
 import com.liuballoon.core.exception.http.NotFoundException;
+import com.liuballoon.mapper.SkuMapper;
 import com.liuballoon.mapper.SpuMapper;
 import com.liuballoon.model.SpuDO;
 import com.liuballoon.service.SpuService;
+import com.liuballoon.vo.SkuVO;
 import com.liuballoon.vo.SpuDetailVO;
 import com.liuballoon.vo.SpuPreviewVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SpuServiceImpl implements SpuService {
 
     @Autowired
     private SpuMapper spuMapper;
+
+    @Autowired
+    private SkuMapper skuMapper;
 
     @Override
     public Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size) {
@@ -40,6 +47,10 @@ public class SpuServiceImpl implements SpuService {
 
     @Override
     public SpuDetailVO getSpuDetailById(String spuId) {
-        return this.spuMapper.getSpuDetailById(spuId).orElseThrow(() -> new NotFoundException(50004));
+        SpuDetailVO spuDetail = this.spuMapper.getSpuDetailById(spuId).orElseThrow(() -> new NotFoundException(50004));
+        List<SkuVO> skuList = this.skuMapper.selectSkuListBySpuId(spuDetail.getId());
+        return spuDetail.toBuilder()
+                .skuList(skuList)
+                .build();
     }
 }

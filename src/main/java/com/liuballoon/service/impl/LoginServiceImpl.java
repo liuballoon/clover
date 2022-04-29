@@ -82,12 +82,21 @@ public class LoginServiceImpl implements LoginService {
             return jwtBuilder.generate(user.getId(), user.getLevel());
         }
         user = UserDO.builder()
-                .nickname(RandomUtil.nickname())
+                .nickname(this.generateNickname())
                 .openid(openid)
                 .level(UserLevel.GENERAL.getValue())
                 .gender(0)
                 .build();
         this.userService.save(user);
         return jwtBuilder.generate(user.getId(), user.getLevel());
+    }
+
+    /**
+     * 生成昵称
+     *
+     * @return
+     */
+    private String generateNickname() {
+        return "temp_" + RandomUtil.generateString(14);
     }
 }

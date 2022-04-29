@@ -8,6 +8,7 @@ package com.liuballoon.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.BannerDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public interface BannerMapper extends BaseMapper<BannerDO> {
      * 根据名称获取轮播图
      *
      * @param name 名称
-     * @return
+     * @return 轮播图
      */
-    Optional<BannerDO> selectBannerByName(String name);
+    Optional<BannerDO> selectBannerByName(@Param("name") String name);
 }
