@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.BannerItemDO;
 import com.liuballoon.vo.BannerItemVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface BannerItemMapper extends BaseMapper<BannerItemDO> {
      * 根据轮播图id获取所有轮播项
      *
      * @param bannerId 轮播图id
-     * @return
+     * @return 轮播项
      */
-    List<BannerItemVO> selectItemsByBannerId(String bannerId);
+    List<BannerItemVO> selectItemsByBannerId(@Param("bannerId") String bannerId);
 }

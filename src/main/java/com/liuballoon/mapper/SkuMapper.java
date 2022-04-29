@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.SkuDO;
 import com.liuballoon.vo.SkuVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,8 +18,8 @@ public interface SkuMapper extends BaseMapper<SkuDO> {
     /**
      * 根据商品主键获取所有单品
      *
-     * @param SpuId 商品主键
+     * @param spuId 商品主键
      * @return
      */
-    List<SkuVO> selectSkuListBySpuId(String SpuId);
+    List<SkuVO> selectSkuListBySpuId(@Param("spuId") String spuId);
 }

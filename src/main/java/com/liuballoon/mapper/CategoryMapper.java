@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.CategoryDO;
 import com.liuballoon.vo.CategoryVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -27,5 +28,5 @@ public interface CategoryMapper extends BaseMapper<CategoryDO> {
      * @param rootId 一级类目id
      * @return
      */
-    List<CategoryVO> selectSubCategoriesByRootId(String rootId);
+    List<CategoryVO> selectSubCategoriesByRootId(@Param("rootId") String rootId);
 }

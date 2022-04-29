@@ -8,6 +8,7 @@ package com.liuballoon.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.UserDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper extends BaseMapper<UserDO> {
@@ -18,5 +19,5 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @param by 查询方式
      * @return 用户
      */
-    UserDO selectUserByCondition(String condition, String by);
+    UserDO selectUserByCondition(@Param("condition") String condition, @Param("by") String by);
 }

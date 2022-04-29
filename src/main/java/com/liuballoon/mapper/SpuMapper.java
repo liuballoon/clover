@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.SpuDO;
 import com.liuballoon.vo.SpuDetailVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Optional;
 
@@ -20,5 +21,5 @@ public interface SpuMapper extends BaseMapper<SpuDO> {
      * @param spuId 商品id
      * @return
      */
-    Optional<SpuDetailVO> getSpuDetailById(String spuId);
+    Optional<SpuDetailVO> getSpuDetailById(@Param("spuId") String spuId);
 }
