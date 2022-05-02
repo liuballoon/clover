@@ -6,4 +6,10 @@
         SET default_address = 0
         WHERE user_id = #{userId}
     </update>
+
+    <update id="deleteAddressById">
+        UPDATE address
+        SET status = 0
+        WHERE id = #{addressId}
+    </update>
 </mapper>

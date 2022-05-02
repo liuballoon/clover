@@ -6,7 +6,6 @@
 package com.liuballoon.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liuballoon.common.pojo.Paging;
@@ -30,7 +29,7 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Paging<AddressVO> getAddressPaging(String userId, int pageNum, int size) {
         var queryWrapper = new QueryWrapper<AddressDO>();
-        queryWrapper.isNull("delete_time");
+        queryWrapper.eq("status", 1);
         var page = new Page<AddressDO>(pageNum, size);
         IPage<AddressVO> paging = this.addressMapper.selectPage(page, queryWrapper).convert(addressDO -> {
             var addressVO = new AddressVO();
@@ -61,8 +60,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void deleteAddressById(String addressId) {
-        var updateWrapper = new UpdateWrapper<AddressDO>();
-        // TODO: 用更新包装器软删除收货地址
+        this.addressMapper.deleteAddressById(addressId);
     }
 
     /**

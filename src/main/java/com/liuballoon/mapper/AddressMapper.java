@@ -18,4 +18,11 @@ public interface AddressMapper extends BaseMapper<AddressDO> {
      * @param userId 用户主键
      */
     void updateAddressNotDefaultByUserId(@Param("userId") String userId);
+
+    /**
+     * 根据收货地址主键软删除收货地址
+     *
+     * @param addressId 收货地址主键
+     */
+    void deleteAddressById(@Param("addressId") String addressId);
 }
