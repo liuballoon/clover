@@ -19,6 +19,5 @@ public class SpuDO extends BaseDO {
     private String price;
     private String discountPrice;
     private String tags;
-    private Boolean online;
     private String description;
 }

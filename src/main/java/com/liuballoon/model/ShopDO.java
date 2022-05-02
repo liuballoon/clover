@@ -18,6 +18,5 @@ public class ShopDO extends BaseDO {
     private String salt;
     private Integer level;
     private String email;
-    private Boolean online;
     private String description;
 }

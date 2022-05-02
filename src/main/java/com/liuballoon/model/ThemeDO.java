@@ -16,6 +16,5 @@ public class ThemeDO extends BaseDO {
     private String name;
     private String templateName;
     private String coverImg;
-    private Boolean online;
     private String description;
 }

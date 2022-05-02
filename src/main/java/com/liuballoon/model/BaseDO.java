@@ -23,6 +23,12 @@ public abstract class BaseDO {
     private String id;
 
     /**
+     * 状态
+     */
+    @JsonIgnore
+    private Short status;
+
+    /**
      * 创建时间
      */
     private LocalDateTime createTime;
@@ -32,10 +38,4 @@ public abstract class BaseDO {
      */
     @JsonIgnore
     private LocalDateTime updateTime;
-
-    /**
-     * 删除时间
-     */
-    @JsonIgnore
-    private LocalDateTime deleteTime;
 }

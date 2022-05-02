@@ -17,5 +17,4 @@ public class NavigationDO extends BaseDO {
     private String coverImg;
     private Integer type;
     private String keyword;
-    private Boolean online;
 }

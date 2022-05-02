@@ -8,10 +8,14 @@ package com.liuballoon.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class OrdersDO extends BaseDO {
     private String orderNum;
-    private Boolean online;
+    private BigDecimal totalPrice;
+    private BigDecimal payPrice;
+    private String addressSnapshot;
     private String description;
 }

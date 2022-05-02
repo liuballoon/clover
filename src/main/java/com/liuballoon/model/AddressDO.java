@@ -12,8 +12,14 @@ import lombok.Setter;
 @Setter
 public class AddressDO extends BaseDO {
     private String userId;
-    private String name;
+    private String receiver;
     private String phone;
-    private String detailAddress;
+    private String provinceCode;
+    private String province;
+    private String cityCode;
+    private String city;
+    private String districtCode;
+    private String district;
+    private String detail;
     private Boolean defaultAddress;
 }

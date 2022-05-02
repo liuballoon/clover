@@ -14,6 +14,5 @@ import lombok.Setter;
 @TableName("banner")
 public class BannerDO extends BaseDO {
     private String name;
-    private Boolean online;
     private String description;
 }

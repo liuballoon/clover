@@ -28,5 +28,4 @@ public class UserDO extends BaseDO {
     private LocalDateTime birthDate;
     private String phone;
     private String email;
-    private Boolean online;
 }
