@@ -16,9 +16,8 @@
                cover_img,
                display
         FROM category
-        WHERE online = 1
+        WHERE status = 1
           AND pid IS NULL
-          AND delete_time IS NULL
     </select>
 
     <select id="selectSubCategoriesByRootId" resultMap="SubCategoriesMap">
@@ -29,8 +28,7 @@
                sc.name AS sub_name,
                sc.cover_img AS sub_cover_img
         FROM category c
-                 LEFT JOIN category sc ON c.id = sc.pid
+                 LEFT JOIN category sc ON c.id = sc.pid AND sc.status = 1
         WHERE c.pid = #{rootId}
-          AND c.delete_time IS NULL
     </select>
 </mapper>

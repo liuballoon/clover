@@ -10,7 +10,6 @@
         <include refid="baseColumn"/>
         FROM sku
         WHERE spu_id = #{spuId}
-        AND online = 1
-        AND delete_time IS NULL
+        AND status = 1
     </select>
 </mapper>

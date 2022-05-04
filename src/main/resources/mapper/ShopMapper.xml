@@ -9,7 +9,6 @@
         SELECT
         <include refid="baseColumn"/>
         FROM shop
-        WHERE online = 1
-        AND delete_time IS NULL
+        WHERE status = 1
     </select>
 </mapper>

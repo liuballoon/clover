@@ -6,8 +6,7 @@
                name,
                description
         FROM banner
-        WHERE name = #{name}
-          AND online = 1
-          AND delete_time IS NULL
+        WHERE name = #{bannerName}
+          AND status = 1
     </select>
 </mapper>

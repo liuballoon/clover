@@ -9,7 +9,7 @@
                keyword
         FROM banner_item
         WHERE banner_id = #{bannerId}
-          AND delete_time IS NULL
+        AND status = 1
         ORDER BY sort
     </select>
 </mapper>

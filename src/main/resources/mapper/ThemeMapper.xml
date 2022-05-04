@@ -8,7 +8,6 @@
                cover_img,
                description
         FROM theme
-        WHERE online = 1
-          AND delete_time IS NULL
+        WHERE status = 1
     </select>
 </mapper>

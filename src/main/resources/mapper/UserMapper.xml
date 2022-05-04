@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.liuballoon.mapper.UserMapper">
     <sql id="baseColumn">
-        *
+        id, account, password, salt, openid, level, nickname, avatar, gender, birth_date, phone, email
     </sql>
 
     <select id="selectUserByCondition" resultType="com.liuballoon.model.UserDO">
@@ -19,7 +19,6 @@
         <if test="by != null and by == 'openid'">
             openid = #{condition}
         </if>
-        AND online = 1
-        AND delete_time IS NULL
+        AND status = 1
     </select>
 </mapper>
