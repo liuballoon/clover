@@ -38,7 +38,7 @@ public class SpuController {
         return Result.success(spuPaging);
     }
 
-    @ApiOperation(value = "根据商品id获取商品详情")
+    @ApiOperation(value = "根据商品主键获取商品详情")
     @GetMapping("/detail/{spuId}")
     public Result getSpuDetailById(@PathVariable @NotNull String spuId) {
         SpuDetailVO spuDetail = this.spuService.getSpuDetailById(spuId);

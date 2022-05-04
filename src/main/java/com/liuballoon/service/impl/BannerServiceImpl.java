@@ -32,11 +32,11 @@ public class BannerServiceImpl implements BannerService {
     private RedisOperator redisOperator;
 
     @Override
-    public BannerVO getBannerByName(String name) {
-        String banner = this.redisOperator.get(name);
+    public BannerVO getBannerByName(String bannerName) {
+        String banner = this.redisOperator.get(bannerName);
         if (banner == null) {
-            BannerVO bannerVO = this.getBannerFromDB(name);
-            this.redisOperator.set(name, Serializer.objectToJson(bannerVO));
+            BannerVO bannerVO = this.getBannerFromDB(bannerName);
+            this.redisOperator.set(bannerName, Serializer.objectToJson(bannerVO));
             return bannerVO;
         }
         return Serializer.jsonToObject(banner, BannerVO.class);
@@ -45,11 +45,11 @@ public class BannerServiceImpl implements BannerService {
     /**
      * 从数据库获取轮播图
      *
-     * @param name 轮播图名称
+     * @param bannerName 轮播图名称
      * @return 轮播图
      */
-    private BannerVO getBannerFromDB(String name) {
-        BannerDO bannerDO = this.bannerMapper.selectBannerByName(name).orElseThrow(() -> new NotFoundException(10004));
+    private BannerVO getBannerFromDB(String bannerName) {
+        BannerDO bannerDO = this.bannerMapper.selectBannerByName(bannerName).orElseThrow(() -> new NotFoundException(10004));
         List<BannerItemVO> items = this.bannerItemMapper.selectItemsByBannerId(bannerDO.getId());
         return new BannerVO(bannerDO, items);
     }

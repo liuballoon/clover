@@ -25,7 +25,6 @@ public class SkuVO {
     private BigDecimal discountPrice;
     private String spec;
     private Integer stock;
-    private String param;
     private String description;
 
     public List<SpecVO> getSpec() {
@@ -34,9 +33,5 @@ public class SkuVO {
         }
         return Serializer.jsonToObject(this.spec, new TypeReference<>() {
         });
-    }
-
-    public void setSpec(List<SpecVO> spec) {
-        this.spec = Serializer.objectToJson(spec);
     }
 }

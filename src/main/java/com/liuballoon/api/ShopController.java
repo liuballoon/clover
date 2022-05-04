@@ -29,9 +29,9 @@ public class ShopController {
     private ShopService shopService;
 
     @ApiOperation(value = "根据店铺主键获取店铺详情")
-    @GetMapping("/detail/{id}")
-    public Result getShopDetailById(@PathVariable @NotNull String id) {
-        ShopDetailVO detail = this.shopService.getShopDetailById(id);
+    @GetMapping("/detail/{shopId}")
+    public Result getShopDetailById(@PathVariable @NotNull String shopId) {
+        ShopDetailVO detail = this.shopService.getShopDetailById(shopId);
         return Result.success(detail);
     }
 }

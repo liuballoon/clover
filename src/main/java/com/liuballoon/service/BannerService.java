@@ -9,10 +9,10 @@ import com.liuballoon.vo.BannerVO;
 
 public interface BannerService {
     /**
-     * 根据名称获取轮播图
+     * 根据轮播图名称获取轮播图
      *
-     * @param name 名称
+     * @param bannerName 轮播图名称
      * @return
      */
-    BannerVO getBannerByName(String name);
+    BannerVO getBannerByName(String bannerName);
 }

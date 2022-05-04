@@ -35,12 +35,12 @@ public class SpuServiceImpl implements SpuService {
     @Override
     public Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size) {
         var queryWrapper = new QueryWrapper<SpuDO>();
-        queryWrapper.eq("online", true).isNull("delete_time");
+        queryWrapper.eq("status", 1);
         var page = new Page<SpuDO>(pageNum, size, false);
         IPage<SpuPreviewVO> paging = this.spuMapper.selectPage(page, queryWrapper).convert(spuDO -> {
-            var spuPreview = new SpuPreviewVO();
-            BeanUtils.copyProperties(spuDO, spuPreview);
-            return spuPreview;
+            var spuPreviewVO = new SpuPreviewVO();
+            BeanUtils.copyProperties(spuDO, spuPreviewVO);
+            return spuPreviewVO;
         });
         return new Paging<>(paging.getCurrent(), paging.getSize(), paging.getRecords().size(), paging.getRecords());
     }

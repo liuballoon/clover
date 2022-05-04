@@ -17,8 +17,8 @@ public interface BannerMapper extends BaseMapper<BannerDO> {
     /**
      * 根据名称获取轮播图
      *
-     * @param name 名称
+     * @param bannerName 轮播图名称
      * @return 轮播图
      */
-    Optional<BannerDO> selectBannerByName(@Param("name") String name);
+    Optional<BannerDO> selectBannerByName(@Param("bannerName") String bannerName);
 }

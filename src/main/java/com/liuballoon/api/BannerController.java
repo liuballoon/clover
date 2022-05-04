@@ -28,10 +28,10 @@ public class BannerController {
     @Autowired
     private BannerService bannerService;
 
-    @ApiOperation(value = "根据名称获取轮播图")
-    @GetMapping("/name/{name}")
-    public Result getBannerByName(@PathVariable @NotNull String name) {
-        BannerVO bannerVO = this.bannerService.getBannerByName(name);
+    @ApiOperation(value = "根据轮播图名称获取轮播图")
+    @GetMapping("/name/{bannerName}")
+    public Result getBannerByName(@PathVariable @NotNull String bannerName) {
+        BannerVO bannerVO = this.bannerService.getBannerByName(bannerName);
         return Result.success(bannerVO);
     }
 }
