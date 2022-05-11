@@ -20,14 +20,14 @@ public class RandomUtil {
      */
     public static String generateString(int length) {
         Random random = new Random();
-        StringBuilder nickname = new StringBuilder();
+        StringBuilder res = new StringBuilder();
         for (var i = 0; i < length; i++) {
             int param = random.nextInt(2);
             switch (param) {
-                case 0 -> nickname.append((char) random.nextInt(97, 123));
-                case 1 -> nickname.append(random.nextInt(10));
+                case 0 -> res.append((char) random.nextInt(97, 123));
+                case 1 -> res.append(random.nextInt(10));
             }
         }
-        return nickname.toString();
+        return res.toString();
     }
 }
