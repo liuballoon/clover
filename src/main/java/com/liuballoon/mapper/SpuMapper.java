@@ -16,9 +16,9 @@ import java.util.Optional;
 @Mapper
 public interface SpuMapper extends BaseMapper<SpuDO> {
     /**
-     * 根据商品id获取商品详情
+     * 根据商品主键获取商品详情
      *
-     * @param spuId 商品id
+     * @param spuId 商品主键
      * @return
      */
     Optional<SpuDetailVO> getSpuDetailById(@Param("spuId") String spuId);

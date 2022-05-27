@@ -20,9 +20,9 @@ public interface SpuService {
     Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size);
 
     /**
-     * 根据商品id获取商品详情
+     * 根据商品主键获取商品详情
      *
-     * @param spuId 商品id
+     * @param spuId 商品主键
      * @return
      */
     SpuDetailVO getSpuDetailById(String spuId);

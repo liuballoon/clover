@@ -23,9 +23,9 @@ public interface CategoryMapper extends BaseMapper<CategoryDO> {
     List<CategoryDO> selectRootCategories();
 
     /**
-     * 根据一级类目id获取所有子类目
+     * 根据一级类目主键获取所有子类目
      *
-     * @param rootId 一级类目id
+     * @param rootId 一级类目主键
      * @return
      */
     List<CategoryVO> selectSubCategoriesByRootId(@Param("rootId") String rootId);
