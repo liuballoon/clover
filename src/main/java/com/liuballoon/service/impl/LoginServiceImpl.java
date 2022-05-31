@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
      */
     private String registerUser(String openid) {
         if (openid == null) {
-            throw new ServerException(9001);
+            throw new ServerException(60000);
         }
         UserDO user = this.userService.getUserByCondition(openid, SelectBy.OPENID);
         if (user != null) {

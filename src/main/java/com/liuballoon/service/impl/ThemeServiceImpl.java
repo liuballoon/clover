@@ -24,7 +24,7 @@ public class ThemeServiceImpl implements ThemeService {
     public List<ThemeVO> getThemes() {
         List<ThemeVO> themes = this.themeMapper.selectThemes();
         if (themes.isEmpty()) {
-            throw new NotFoundException(20004);
+            throw new NotFoundException(10104);
         }
         return themes;
     }

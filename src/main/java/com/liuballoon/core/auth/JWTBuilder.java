@@ -67,7 +67,7 @@ public class JWTBuilder {
             decodedJWT = jwtVerifier.verify(token);
             return decodedJWT.getClaims();
         } catch (JWTVerificationException e) {
-            throw new UnauthorizedException(70002);
+            throw new UnauthorizedException(60002);
         }
     }
 

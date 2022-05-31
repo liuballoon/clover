@@ -32,7 +32,7 @@ public class Serializer {
             return Serializer.mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerException(9101);
+            throw new ServerException(60100);
         }
     }
 
@@ -48,7 +48,7 @@ public class Serializer {
             return Serializer.mapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerException(9101);
+            throw new ServerException(60100);
         }
     }
 
@@ -64,7 +64,7 @@ public class Serializer {
             return Serializer.mapper.readValue(json, type);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new ServerException(9101);
+            throw new ServerException(60100);
         }
     }
 }

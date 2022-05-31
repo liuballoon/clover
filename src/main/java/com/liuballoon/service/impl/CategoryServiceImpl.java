@@ -27,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<RootCategoryVO> getRootCategories() {
         List<CategoryDO> rootCategories = this.categoryMapper.selectRootCategories();
         if (rootCategories.isEmpty()) {
-            throw new NotFoundException(30004);
+            throw new NotFoundException(10304);
         }
         return rootCategories.stream()
                 .map(RootCategoryVO::new)
@@ -38,7 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<CategoryVO> getSubCategories(String rootId) {
         List<CategoryVO> subCategories = this.categoryMapper.selectSubCategoriesByRootId(rootId);
         if (subCategories.isEmpty()) {
-            throw new NotFoundException(30005);
+            throw new NotFoundException(10305);
         }
         return subCategories;
     }

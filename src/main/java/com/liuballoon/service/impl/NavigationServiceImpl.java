@@ -24,7 +24,7 @@ public class NavigationServiceImpl implements NavigationService {
     public List<NavigationVO> getNavigations() {
         List<NavigationVO> navigations = this.navigationMapper.selectNavigations();
         if (navigations.isEmpty()) {
-            throw new NotFoundException(40004);
+            throw new NotFoundException(10404);
         }
         return navigations;
     }

@@ -47,7 +47,7 @@ public class SpuServiceImpl implements SpuService {
 
     @Override
     public SpuDetailVO getSpuDetailById(String spuId) {
-        SpuDetailVO spuDetail = this.spuMapper.getSpuDetailById(spuId).orElseThrow(() -> new NotFoundException(50004));
+        SpuDetailVO spuDetail = this.spuMapper.getSpuDetailById(spuId).orElseThrow(() -> new NotFoundException(10504));
         List<SkuVO> skuList = this.skuMapper.selectSkuListBySpuId(spuDetail.getId());
         return spuDetail.toBuilder()
                 .skuList(skuList)

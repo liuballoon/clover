@@ -33,7 +33,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
         }
         String auth = request.getHeader("Authorization");
         if (!auth.startsWith("Bearer ")) {
-            throw new UnauthorizedException(70001);
+            throw new UnauthorizedException(60001);
         }
         String token = auth.substring(7);
         Map<String, Claim> claims = this.jwtBuilder.getClaims(token);

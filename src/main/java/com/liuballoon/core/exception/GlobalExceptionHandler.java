@@ -52,7 +52,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        int code = 9201;
+        int code = 60200;
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         String message = this.formatErrorsMessages(errors);
         return Result.failure(code, message);
