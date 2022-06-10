@@ -5,6 +5,7 @@
  */
 package com.liuballoon.api;
 
+import com.liuballoon.core.response.Result;
 import com.liuballoon.dto.OrderDTO;
 import com.liuballoon.service.OrdersService;
 import io.swagger.annotations.Api;
@@ -25,7 +26,8 @@ public class OrdersController {
 
     @ApiOperation(value = "根据订单信息下单")
     @PostMapping("/place")
-    public void placeOrder(@RequestBody OrderDTO orderDTO) {
-        // TODO: 校验订单的合法性 -》 1.库存不为0 2.前后端计算价格相同 3.响应式
+    public Result placeOrder(@RequestBody OrderDTO order) {
+        this.ordersService.placeOrder(order);
+        return Result.success("下单成功");
     }
 }

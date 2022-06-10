@@ -6,12 +6,12 @@
 package com.liuballoon.core.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 自定义响应对象
+ * 响应对象
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +25,10 @@ public class Result {
 
     public static Result success(Object data) {
         return new Result(200, "请求成功", true, data);
+    }
+
+    public static Result success(String message) {
+        return new Result(200, message, true, null);
     }
 
     public static Result failure(int code, String message) {

@@ -22,7 +22,7 @@
                si.img AS introduce_img
         FROM spu
                  LEFT JOIN spu_display sd ON spu.id = sd.spu_id AND sd.status = 1
-                 LEFT JOIN spu_introduce si ON spu.id = si.spu_id AND si.status = 1
+                 LEFT JOIN spu_intro si ON spu.id = si.spu_id AND si.status = 1
         WHERE spu.id = #{spuId}
           AND spu.status = 1
         ORDER BY sd.sort, si.sort

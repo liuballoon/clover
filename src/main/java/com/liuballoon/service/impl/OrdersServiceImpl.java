@@ -5,9 +5,52 @@
  */
 package com.liuballoon.service.impl;
 
+import com.liuballoon.core.exception.general.OrderException;
+import com.liuballoon.dto.OrderDTO;
+import com.liuballoon.dto.SkuDTO;
+import com.liuballoon.mapper.SkuMapper;
 import com.liuballoon.service.OrdersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
+
+    @Autowired
+    private SkuMapper skuMapper;
+
+    @Override
+    public void placeOrder(OrderDTO order) {
+        this.check(order);
+        this.place(order);
+    }
+
+    /**
+     * 校验订单
+     *
+     * @param orderDTO 订单信息
+     */
+    private void check(OrderDTO orderDTO) {
+        // TODO: 校验工作
+    }
+
+    /**
+     * 下单
+     *
+     * @param order 订单信息
+     */
+    private void place(OrderDTO order) {
+        this.checkStock(order.getSkuList());
+    }
+
+    /**
+     * 校验库存
+     *
+     * @param skuList 商品列表
+     */
+    private void checkStock(List<SkuDTO> skuList) {
+        skuList.forEach(sku -> this.skuMapper.checkStock(sku.getId(), sku.getCount()).orElseThrow(() -> new OrderException(10705)));
+    }
 }

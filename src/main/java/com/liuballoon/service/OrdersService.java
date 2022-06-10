@@ -9,9 +9,9 @@ import com.liuballoon.dto.OrderDTO;
 
 public interface OrdersService {
     /**
-     * 校验订单
+     * 下单
      *
-     * @param orderDTO 订单信息
+     * @param order 订单信息
      */
-    void check(OrderDTO orderDTO);
+    void placeOrder(OrderDTO order);
 }

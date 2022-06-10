@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface SkuMapper extends BaseMapper<SkuDO> {
@@ -22,4 +23,13 @@ public interface SkuMapper extends BaseMapper<SkuDO> {
      * @return
      */
     List<SkuVO> selectSkuListBySpuId(@Param("spuId") String spuId);
+
+    /**
+     * 校验商品库存数量
+     *
+     * @param skuId 商品主键
+     * @param buyCount 购买数量
+     * @return
+     */
+    Optional<String> checkStock(@Param("skuId") String skuId, @Param("buyCount") Integer buyCount);
 }
