@@ -13,8 +13,23 @@ import lombok.Setter;
 @Setter
 @TableName("theme")
 public class ThemeDO extends BaseDO {
+    /**
+     * 名称
+     */
     private String name;
+
+    /**
+     * 模板名称
+     */
     private String templateName;
+
+    /**
+     * 封面图
+     */
     private String coverImg;
+
+    /**
+     * 描述
+     */
     private String description;
 }

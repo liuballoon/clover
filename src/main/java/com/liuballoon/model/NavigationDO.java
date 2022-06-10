@@ -13,8 +13,23 @@ import lombok.Setter;
 @Setter
 @TableName("navigation")
 public class NavigationDO extends BaseDO {
+    /**
+     * 名称
+     */
     private String name;
+
+    /**
+     * 封面图
+     */
     private String coverImg;
+
+    /**
+     * 类型（0分类 1专题）
+     */
     private Integer type;
+
+    /**
+     * 关键字
+     */
     private String keyword;
 }

@@ -13,6 +13,13 @@ import lombok.Setter;
 @Setter
 @TableName("banner")
 public class BannerDO extends BaseDO {
+    /**
+     * 名称
+     */
     private String name;
+
+    /**
+     * 描述
+     */
     private String description;
 }

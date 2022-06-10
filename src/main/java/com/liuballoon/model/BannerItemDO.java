@@ -13,11 +13,33 @@ import lombok.Setter;
 @Setter
 @TableName("banner_item")
 public class BannerItemDO extends BaseDO {
-    private String id;
+    /**
+     * 轮播图主键
+     */
     private String bannerId;
+
+    /**
+     * 名称
+     */
     private String name;
+
+    /**
+     * 封面图
+     */
     private String coverImg;
+
+    /**
+     * 类型（0商品 1专题 2活动）
+     */
     private Integer type;
+
+    /**
+     * 关键字
+     */
     private String keyword;
+
+    /**
+     * 排序
+     */
     private Integer sort;
 }

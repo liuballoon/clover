@@ -13,11 +13,43 @@ import lombok.Setter;
 @Setter
 @TableName("spu")
 public class SpuDO extends BaseDO {
+    /**
+     * 店铺主键
+     */
     private String shopId;
-    private String title;
+
+    /**
+     * 类目主键
+     */
+    private String categoryId;
+
+    /**
+     * 名称
+     */
+    private String name;
+
+    /**
+     * 封面图
+     */
     private String coverImg;
+
+    /**
+     * 价格
+     */
     private String price;
+
+    /**
+     * 折扣价
+     */
     private String discountPrice;
+
+    /**
+     * 标签
+     */
     private String tags;
+
+    /**
+     * 描述
+     */
     private String description;
 }
