@@ -15,7 +15,7 @@ public class EncryptUtil {
      *
      * @param target 加密目标
      * @param salt 盐
-     * @return 密文
+     * @return 加密后的字符串
      */
     public static String MD5WithSalt(String target, String salt) {
         return null;

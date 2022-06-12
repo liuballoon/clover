@@ -8,7 +8,7 @@ package com.liuballoon.common.utils;
 import com.liuballoon.common.pojo.PageParam;
 
 /**
- * 分页工具类
+ * 分页工具
  */
 public class PageMan {
 

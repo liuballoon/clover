@@ -16,7 +16,7 @@ public class RandomUtil {
      * 随机生成指定长度的字符串
      *
      * @param length 长度
-     * @return
+     * @return 随机字符串
      */
     public static String generateString(int length) {
         Random random = new Random();

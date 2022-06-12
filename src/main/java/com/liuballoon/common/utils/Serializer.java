@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liuballoon.core.exception.http.ServerException;
 
 /**
- * 序列化工具类
+ * 序列化工具
  */
 public class Serializer {
 
