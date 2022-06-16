@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Setter
 public class SkuDTO {
     private String id;
+    private String shopId;
     private Integer count;
     private BigDecimal price;
     private BigDecimal totalPrice;

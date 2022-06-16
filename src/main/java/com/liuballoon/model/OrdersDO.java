@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -34,9 +35,24 @@ public class OrdersDO extends BaseDO {
     private BigDecimal payPrice;
 
     /**
+     * 商品快照
+     */
+    private String snapItem;
+
+    /**
      * 收货地址快照
      */
-    private String addressSnapshot;
+    private String snapAddress;
+
+    /**
+     * 过期时间
+     */
+    private LocalDateTime expiredTime;
+
+    /**
+     * 支付时间
+     */
+    private LocalDateTime payTime;
 
     /**
      * 描述
