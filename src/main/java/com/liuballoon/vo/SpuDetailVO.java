@@ -17,7 +17,7 @@ import java.util.List;
 public class SpuDetailVO {
     private String id;
     private String shopId;
-    private String title;
+    private String name;
     private String price;
     private String discountPrice;
     private String tags;

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class SpuPreviewVO {
     private String id;
-    private String title;
+    private String name;
     private String coverImg;
     private String price;
     private String discountPrice;
