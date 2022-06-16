@@ -16,7 +16,7 @@ import com.liuballoon.model.SpuDO;
 import com.liuballoon.service.SpuService;
 import com.liuballoon.vo.SkuVO;
 import com.liuballoon.vo.SpuDetailVO;
-import com.liuballoon.vo.SpuPreviewVO;
+import com.liuballoon.vo.SpuVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +33,12 @@ public class SpuServiceImpl implements SpuService {
     private SkuMapper skuMapper;
 
     @Override
-    public Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size) {
+    public Paging<SpuVO> getSpuPaging(int pageNum, int size) {
         var queryWrapper = new QueryWrapper<SpuDO>();
         queryWrapper.eq("status", 1);
         var page = new Page<SpuDO>(pageNum, size, false);
-        IPage<SpuPreviewVO> paging = this.spuMapper.selectPage(page, queryWrapper).convert(spuDO -> {
-            var spuPreviewVO = new SpuPreviewVO();
+        IPage<SpuVO> paging = this.spuMapper.selectPage(page, queryWrapper).convert(spuDO -> {
+            var spuPreviewVO = new SpuVO();
             BeanUtils.copyProperties(spuDO, spuPreviewVO);
             return spuPreviewVO;
         });

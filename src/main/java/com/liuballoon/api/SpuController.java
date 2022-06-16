@@ -11,7 +11,7 @@ import com.liuballoon.common.utils.PageMan;
 import com.liuballoon.core.response.Result;
 import com.liuballoon.service.SpuService;
 import com.liuballoon.vo.SpuDetailVO;
-import com.liuballoon.vo.SpuPreviewVO;
+import com.liuballoon.vo.SpuVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class SpuController {
     public Result getSpuPaging(@RequestParam(defaultValue = "0") int start,
                                @RequestParam(defaultValue = "10") int count) {
         PageParam param = PageMan.convertParams(start, count);
-        Paging<SpuPreviewVO> spuPaging = this.spuService.getSpuPaging(param.getPageNum(), param.getSize());
+        Paging<SpuVO> spuPaging = this.spuService.getSpuPaging(param.getPageNum(), param.getSize());
         return Result.success(spuPaging);
     }
 

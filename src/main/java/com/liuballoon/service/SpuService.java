@@ -7,7 +7,7 @@ package com.liuballoon.service;
 
 import com.liuballoon.common.pojo.Paging;
 import com.liuballoon.vo.SpuDetailVO;
-import com.liuballoon.vo.SpuPreviewVO;
+import com.liuballoon.vo.SpuVO;
 
 public interface SpuService {
     /**
@@ -17,7 +17,7 @@ public interface SpuService {
      * @param size 每页的数据量
      * @return
      */
-    Paging<SpuPreviewVO> getSpuPaging(int pageNum, int size);
+    Paging<SpuVO> getSpuPaging(int pageNum, int size);
 
     /**
      * 根据商品主键获取商品详情

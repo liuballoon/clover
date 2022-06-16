@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SpuPreviewVO {
+public class SpuVO {
     private String id;
     private String name;
     private String coverImg;
