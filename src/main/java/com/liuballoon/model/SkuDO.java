@@ -39,6 +39,11 @@ public class SkuDO extends BaseDO {
     private BigDecimal discountPrice;
 
     /**
+     * 规格
+     */
+    private String specs;
+
+    /**
      * 库存
      */
     private Integer stock;

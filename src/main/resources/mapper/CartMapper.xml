@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuballoon.mapper.CartMapper">
+
+    <sql id="baseColumn">
+        id, shop_id, sku_id, item, total
+    </sql>
+
+    <select id="selectCartByUserId" resultType="com.liuballoon.vo.CartVO">
+        SELECT
+        <include refid="baseColumn"/>
+        FROM cart
+        WHERE user_id = #{userId}
+        AND status = 1
+    </select>
+
+    <delete id="deleteCartById">
+        UPDATE cart
+        SET status = 0
+        WHERE id = #{cartId}
+    </delete>
+</mapper>
