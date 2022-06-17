@@ -39,10 +39,14 @@ public class AddressServiceImpl implements AddressService {
         return new Paging<>(paging.getCurrent(), paging.getSize(), paging.getRecords().size(), paging.getRecords());
     }
 
+    @Transactional
     @Override
     public void createAddress(AddressDTO addressDTO) {
         var address = new AddressDO();
         BeanUtils.copyProperties(addressDTO, address);
+        if (address.getDefaultAddress()) {
+            this.setAddressNotDefault();
+        }
         address.setUserId(LocalUser.get().getId());  // 填充当前用户主键
         this.addressMapper.insert(address);
     }

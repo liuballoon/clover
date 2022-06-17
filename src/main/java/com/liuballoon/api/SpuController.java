@@ -31,8 +31,8 @@ public class SpuController {
 
     @ApiOperation(value = "分页获取所有商品")
     @GetMapping("/page")
-    public Result getSpuPaging(@RequestParam(defaultValue = "0") int start,
-                               @RequestParam(defaultValue = "10") int count) {
+    public Result getSpuPaging(@RequestParam(required = false, defaultValue = "0") int start,
+                               @RequestParam(required = false, defaultValue = "10") int count) {
         PageParam param = PageMan.convertParams(start, count);
         Paging<SpuVO> spuPaging = this.spuService.getSpuPaging(param.getPageNum(), param.getSize());
         return Result.success(spuPaging);

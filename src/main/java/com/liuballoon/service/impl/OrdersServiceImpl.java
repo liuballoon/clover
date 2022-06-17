@@ -22,9 +22,9 @@ public class OrdersServiceImpl implements OrdersService {
     private SkuMapper skuMapper;
 
     @Override
-    public void placeOrder(OrderDTO order) {
-        this.check(order);
-        this.place(order);
+    public void placeOrder(OrderDTO orderDTO) {
+        this.check(orderDTO);
+        this.place(orderDTO);
     }
 
     /**
@@ -39,10 +39,10 @@ public class OrdersServiceImpl implements OrdersService {
     /**
      * 下单
      *
-     * @param order 订单信息
+     * @param orderDTO 订单信息
      */
-    private void place(OrderDTO order) {
-        this.checkStock(order.getSkuList());
+    private void place(OrderDTO orderDTO) {
+        this.checkStock(orderDTO.getSkuList());
     }
 
     /**
@@ -51,6 +51,6 @@ public class OrdersServiceImpl implements OrdersService {
      * @param skuList 商品列表
      */
     private void checkStock(List<SkuDTO> skuList) {
-        skuList.forEach(sku -> this.skuMapper.checkStock(sku.getId(), sku.getCount()).orElseThrow(() -> new OrderException(10705)));
+        skuList.forEach(sku -> this.skuMapper.checkStock(sku.getId(), sku.getTotal()).orElseThrow(() -> new OrderException(10705)));
     }
 }

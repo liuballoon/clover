@@ -8,35 +8,20 @@ package com.liuballoon.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 public class UserInfoDTO {
-    /**
-     * 主键
-     */
-    @NotNull
     private String id;
 
-    /**
-     * 昵称
-     */
+    @NotBlank(message = "昵称不能为空")
     private String nickname;
-
-    /**
-     * 头像
-     */
     private String avatar;
 
-    /**
-     * 性别（0保密 1男 2女）
-     */
+    @Positive(message = "性别必须用正整数表示")
     private Integer gender;
-
-    /**
-     * 出生日期
-     */
     private LocalDate birthDate;
 }

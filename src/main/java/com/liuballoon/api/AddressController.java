@@ -17,9 +17,13 @@ import com.liuballoon.vo.AddressVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+
 @Api(tags = "收货地址")
+@Validated
 @RestController
 @RequestMapping("/address")
 public class AddressController {
@@ -29,10 +33,10 @@ public class AddressController {
 
     @ApiOperation(value = "根据用户主键分页获取所有收货地址")
     @AccessScope(UserLevel.GENERAL)
-    @GetMapping("/all/{userId}")
-    public Result getAddresses(@PathVariable String userId,
-                               @RequestParam(defaultValue = "0") int start,
-                               @RequestParam(defaultValue = "10") int count) {
+    @GetMapping("/page")
+    public Result getAddresses(@RequestParam @NotBlank String userId,
+                               @RequestParam(required = false, defaultValue = "0") int start,
+                               @RequestParam(required = false, defaultValue = "10") int count) {
         PageParam param = PageMan.convertParams(start, count);
         Paging<AddressVO> addressPaging = this.addressService.getAddressPaging(userId, param.getPageNum(), param.getSize());
         return Result.success(addressPaging);
@@ -41,7 +45,7 @@ public class AddressController {
     @ApiOperation(value = "创建收货地址")
     @AccessScope(UserLevel.GENERAL)
     @PostMapping("/create")
-    public Result createAddress(@RequestBody AddressDTO addressDTO) {
+    public Result createAddress(@RequestBody @Validated AddressDTO addressDTO) {
         this.addressService.createAddress(addressDTO);
         return Result.success("创建成功");
 
@@ -50,7 +54,7 @@ public class AddressController {
     @ApiOperation(value = "修改收货地址")
     @AccessScope(UserLevel.GENERAL)
     @PutMapping("/update")
-    public Result updateAddress(@RequestBody AddressDTO addressDTO) {
+    public Result updateAddress(@RequestBody @Validated AddressDTO addressDTO) {
         this.addressService.updateAddress(addressDTO);
         return Result.success("修改成功");
     }

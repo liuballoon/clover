@@ -8,61 +8,39 @@ package com.liuballoon.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 public class AddressDTO {
-    /**
-     * 主键
-     */
     private String id;
 
-    /**
-     * 收件人
-     */
+    @NotBlank(message = "收件人不能为空")
     private String receiver;
 
-    /**
-     * 联系方式
-     */
+    @NotBlank(message = "联系方式不能为空")
     private String phone;
 
-    /**
-     * 省份代码
-     */
+    @NotBlank(message = "省份代码不能为空")
     private String provinceCode;
 
-    /**
-     * 省份
-     */
+    @NotBlank(message = "省份不能为空")
     private String province;
 
-    /**
-     * 城市代码
-     */
+    @NotBlank(message = "城市代码不能为空")
     private String cityCode;
 
-    /**
-     * 城市
-     */
+    @NotBlank(message = "城市不能为空")
     private String city;
 
-    /**
-     * 区县代码
-     */
+    @NotBlank(message = "区县代码不能为空")
     private String districtCode;
 
-    /**
-     * 区县
-     */
+    @NotBlank(message = "区县不能为空")
     private String district;
 
-    /**
-     * 详细地址
-     */
+    @NotBlank(message = "详细地址不能为空")
     private String detail;
 
-    /**
-     * 是否默认地址（0否 1是）
-     */
     private Boolean defaultAddress;
 }

@@ -15,21 +15,12 @@ import javax.validation.constraints.Positive;
 @Getter
 @Setter
 public class LoginDTO {
-    /**
-     * 账号
-     */
     @NotBlank(message = "账号不能为空")
     private String account;
 
-    /**
-     * 密码
-     */
     @Length(min = 8, max = 16, message = "密码长度必须为8~16")
     private String password;
 
-    /**
-     * 登录方式
-     */
     @NotBlank(message = "登陆方式不能为空")
     @Positive(message = "登录方式必须用正整数表示")
     private Integer loginWay;
