@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CartVO {
-    private String userId;
+    private String id;
     private String shopId;
     private String skuId;
     private String item;

@@ -34,6 +34,14 @@ public interface CartService {
     void updateSkuInCart(SkuDTO skuDTO);
 
     /**
+     * 修改购物车中商品的数量
+     *
+     * @param cartId 购物车主键
+     * @param total  商品数量
+     */
+    void updateSkuTotalInCart(String cartId, int total);
+
+    /**
      * 从购物车中删除商品
      *
      * @param cartId 购物车主键

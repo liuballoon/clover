@@ -5,6 +5,7 @@
  */
 package com.liuballoon.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.liuballoon.common.utils.Serializer;
 import com.liuballoon.core.auth.LocalUser;
 import com.liuballoon.core.exception.http.NotFoundException;
@@ -52,7 +53,28 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void updateSkuInCart(SkuDTO skuDTO) {
-        // TODO: update sku in cart
+        SkuDO sku = this.skuMapper.selectById(skuDTO.getId());
+        if (sku == null) {
+            throw new NotFoundException(10504);
+        }
+        UpdateWrapper<CartDO> wrapper = new UpdateWrapper<CartDO>()
+                .eq("user_id", LocalUser.get().getId())
+                .eq("sku_id", skuDTO.getId());
+        CartDO cart = CartDO.builder()
+                .shopId(skuDTO.getShopId())
+                .skuId(skuDTO.getId())
+                .item(Serializer.objectToJson(sku))
+                .total(skuDTO.getTotal())
+                .build();
+        this.cartMapper.update(cart, wrapper);
+    }
+
+    @Override
+    public void updateSkuTotalInCart(String cartId, int total) {
+        CartDO cart = new CartDO();
+        cart.setId(cartId);
+        cart.setTotal(total);
+        this.cartMapper.updateById(cart);
     }
 
     @Override

@@ -50,6 +50,14 @@ public class CartController {
         return Result.success("修改成功");
     }
 
+    @ApiOperation(value = "修改购物车中商品的数量")
+    @PutMapping("/update/total")
+    public Result updateCart(@RequestParam String cartId,
+                             @RequestParam int total) {
+        this.cartService.updateSkuTotalInCart(cartId, total);
+        return Result.success("修改成功");
+    }
+
     @ApiOperation(value = "根据购物车主键删除购物车中的商品")
     @PutMapping("/delete/{cartId}")
     public Result deleteCart(@PathVariable @NotNull String cartId) {
