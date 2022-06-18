@@ -32,4 +32,9 @@ public class NavigationDO extends BaseDO {
      * 关键字
      */
     private String keyword;
+
+    /**
+     * 排序
+     */
+    private Integer sort;
 }
