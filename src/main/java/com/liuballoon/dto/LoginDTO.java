@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Getter
@@ -21,7 +22,7 @@ public class LoginDTO {
     @Length(min = 8, max = 16, message = "密码长度必须为8~16")
     private String password;
 
-    @NotBlank(message = "登陆方式不能为空")
+    @NotNull(message = "登陆方式不能为空")
     @Positive(message = "登录方式必须用正整数表示")
     private Integer loginWay;
 }

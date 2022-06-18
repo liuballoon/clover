@@ -16,7 +16,7 @@ public class RootCategoryVO {
     private String id;
     private String name;
     private String coverImg;
-    private Boolean display;
+    private Boolean defaultDisplay;
 
     public RootCategoryVO(CategoryDO categoryDO) {
         BeanUtils.copyProperties(categoryDO, this);

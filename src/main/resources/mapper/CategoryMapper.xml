@@ -14,7 +14,7 @@
         SELECT id,
                name,
                cover_img,
-               display
+               default_display
         FROM category
         WHERE status = 1
           AND pid IS NULL
