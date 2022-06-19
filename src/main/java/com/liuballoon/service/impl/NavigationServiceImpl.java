@@ -35,9 +35,8 @@ public class NavigationServiceImpl implements NavigationService {
             List<NavigationVO> navigationList = this.navigationMapper.selectNavigations();
             if (!navigationList.isEmpty()) {
                 this.redisOperator.set(KEY, Serializer.objectToJson(navigationList));
-                return navigationList;
             }
-            return Collections.emptyList();
+            return navigationList;
         }
         return Serializer.jsonToObject(navigations, new TypeReference<>() {
         });

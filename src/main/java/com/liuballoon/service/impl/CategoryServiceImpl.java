@@ -5,6 +5,9 @@
  */
 package com.liuballoon.service.impl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.liuballoon.common.utils.RedisOperator;
+import com.liuballoon.common.utils.Serializer;
 import com.liuballoon.core.exception.http.NotFoundException;
 import com.liuballoon.mapper.CategoryMapper;
 import com.liuballoon.model.CategoryDO;
@@ -14,32 +17,46 @@ import com.liuballoon.vo.RootCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    private static final String KEY = "category";
+
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private RedisOperator redisOperator;
+
     @Override
     public List<RootCategoryVO> getRootCategories() {
-        List<CategoryDO> rootCategories = this.categoryMapper.selectRootCategories();
-        if (rootCategories.isEmpty()) {
-            throw new NotFoundException(10304);
+        String categories = this.redisOperator.get(KEY);
+        if (categories == null) {
+            List<RootCategoryVO> rootCategories = this.categoryMapper.selectRootCategories();
+            if (!rootCategories.isEmpty()) {
+                this.redisOperator.set(KEY, Serializer.objectToJson(rootCategories));
+            }
+            return rootCategories;
         }
-        return rootCategories.stream()
-                .map(RootCategoryVO::new)
-                .collect(Collectors.toList());
+        return Serializer.jsonToObject(categories, new TypeReference<>() {
+        });
     }
 
     @Override
     public List<CategoryVO> getSubCategories(String rootId) {
-        List<CategoryVO> subCategories = this.categoryMapper.selectSubCategoriesByRootId(rootId);
-        if (subCategories.isEmpty()) {
-            throw new NotFoundException(10305);
+        String subs = this.redisOperator.get(rootId);
+        if (subs == null) {
+            List<CategoryVO> subCategories = this.categoryMapper.selectSubCategoriesByRootId(rootId);
+            if (!subCategories.isEmpty()) {
+                this.redisOperator.set(rootId, Serializer.objectToJson(subCategories));
+            }
+            return subCategories;
         }
-        return subCategories;
+        return Serializer.jsonToObject(subs, new TypeReference<>() {
+        });
     }
 }
