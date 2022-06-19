@@ -8,6 +8,7 @@ package com.liuballoon.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liuballoon.model.CategoryDO;
 import com.liuballoon.vo.CategoryVO;
+import com.liuballoon.vo.RootCategoryVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,7 +21,7 @@ public interface CategoryMapper extends BaseMapper<CategoryDO> {
      *
      * @return
      */
-    List<CategoryDO> selectRootCategories();
+    List<RootCategoryVO> selectRootCategories();
 
     /**
      * 根据一级类目主键获取所有子类目
