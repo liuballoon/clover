@@ -15,6 +15,5 @@ import org.springframework.beans.BeanUtils;
 public class RootCategoryVO {
     private String id;
     private String name;
-    private String coverImg;
     private Boolean defaultDisplay;
 }

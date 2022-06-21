@@ -13,7 +13,6 @@
     <select id="selectRootCategories" resultType="com.liuballoon.vo.RootCategoryVO">
         SELECT id,
                name,
-               cover_img,
                default_display
         FROM category
         WHERE status = 1

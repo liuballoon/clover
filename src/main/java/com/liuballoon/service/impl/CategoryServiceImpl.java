@@ -8,18 +8,14 @@ package com.liuballoon.service.impl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.liuballoon.common.utils.RedisOperator;
 import com.liuballoon.common.utils.Serializer;
-import com.liuballoon.core.exception.http.NotFoundException;
 import com.liuballoon.mapper.CategoryMapper;
-import com.liuballoon.model.CategoryDO;
 import com.liuballoon.service.CategoryService;
 import com.liuballoon.vo.CategoryVO;
 import com.liuballoon.vo.RootCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
