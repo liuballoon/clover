@@ -5,10 +5,13 @@
  */
 package com.liuballoon.service.impl;
 
+import com.liuballoon.core.auth.LocalUser;
 import com.liuballoon.core.exception.general.OrderException;
 import com.liuballoon.dto.OrderDTO;
 import com.liuballoon.dto.SkuDTO;
+import com.liuballoon.mapper.OrdersMapper;
 import com.liuballoon.mapper.SkuMapper;
+import com.liuballoon.model.OrdersDO;
 import com.liuballoon.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ import java.util.List;
 
 @Service
 public class OrdersServiceImpl implements OrdersService {
+
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     @Autowired
     private SkuMapper skuMapper;
@@ -34,6 +40,7 @@ public class OrdersServiceImpl implements OrdersService {
      */
     private void check(OrderDTO orderDTO) {
         // TODO: 校验工作
+        this.checkStock(orderDTO.getSkuList());
     }
 
     /**
@@ -42,15 +49,20 @@ public class OrdersServiceImpl implements OrdersService {
      * @param orderDTO 订单信息
      */
     private void place(OrderDTO orderDTO) {
-        this.checkStock(orderDTO.getSkuList());
+        OrdersDO order = OrdersDO.builder()
+                .userId(LocalUser.get().getId())
+                .build();
+        this.ordersMapper.insert(order);
     }
 
     /**
      * 校验库存
      *
-     * @param skuList 商品列表
+     * @param skuList 购买商品列表
      */
     private void checkStock(List<SkuDTO> skuList) {
-        skuList.forEach(sku -> this.skuMapper.checkStock(sku.getId(), sku.getTotal()).orElseThrow(() -> new OrderException(10705)));
+        for (SkuDTO sku : skuList) {
+            this.skuMapper.checkStockEnough(sku.getId(), sku.getTotal()).orElseThrow(() -> new OrderException(10705));
+        }
     }
 }

@@ -13,7 +13,7 @@
         AND status = 1
     </select>
 
-    <select id="checkStock" resultType="java.lang.String">
+    <select id="checkStockEnough" resultType="java.lang.String">
         SELECT id
         FROM sku
         WHERE sku_id = #{skuId}

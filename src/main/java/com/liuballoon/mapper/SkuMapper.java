@@ -25,11 +25,11 @@ public interface SkuMapper extends BaseMapper<SkuDO> {
     List<SkuVO> selectSkuListBySpuId(@Param("spuId") String spuId);
 
     /**
-     * 校验商品库存数量
+     * 校验商品库存是否足够
      *
      * @param skuId 商品主键
      * @param buyCount 购买数量
      * @return
      */
-    Optional<String> checkStock(@Param("skuId") String skuId, @Param("buyCount") Integer buyCount);
+    Optional<String> checkStockEnough(@Param("skuId") String skuId, @Param("buyCount") Integer buyCount);
 }
