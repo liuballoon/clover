@@ -33,7 +33,7 @@ public class AddressController {
 
     @ApiOperation(value = "根据用户主键分页获取所有收货地址")
     @AccessScope(UserLevel.GENERAL)
-    @GetMapping("/page")
+    @GetMapping
     public Result getAddresses(@RequestParam @NotBlank String userId,
                                @RequestParam(required = false, defaultValue = "0") int start,
                                @RequestParam(required = false, defaultValue = "10") int count) {

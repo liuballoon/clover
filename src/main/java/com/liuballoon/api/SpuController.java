@@ -29,8 +29,8 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
-    @ApiOperation(value = "分页获取所有商品")
-    @GetMapping("/page")
+    @ApiOperation(value = "获取所有商品")
+    @GetMapping
     public Result getSpuPaging(@RequestParam(required = false, defaultValue = "0") int start,
                                @RequestParam(required = false, defaultValue = "10") int count) {
         PageParam param = PageMan.convertParams(start, count);
@@ -43,5 +43,14 @@ public class SpuController {
     public Result getSpuDetailById(@PathVariable @NotNull String spuId) {
         SpuDetailVO spuDetail = this.spuService.getSpuDetailById(spuId);
         return Result.success(spuDetail);
+    }
+
+    @ApiOperation(value = "获取商品评论信息")
+    @GetMapping("/evaluation")
+    public Result getEvaluation(@RequestParam String spuId,
+                                @RequestParam(required = false, defaultValue = "0") int start,
+                                @RequestParam(required = false, defaultValue = "10") int count) {
+        PageParam param = PageMan.convertParams(start, count);
+        return Result.success(null);
     }
 }

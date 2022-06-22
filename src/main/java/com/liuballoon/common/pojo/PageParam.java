@@ -13,6 +13,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PageParam {
+    /**
+     * 页码
+     */
     private int pageNum;
+
+    /**
+     * 每页的数据量
+     */
     private int size;
 }
